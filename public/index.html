@@ -33,7 +33,7 @@
 <div class="tape"></div>
 <section id="infos"><img class="dc d5" src="/img/masque2.png" alt="" aria-hidden="true" loading="lazy"><div class="dc bb pt d7" aria-hidden="true"><span class="el"><i>Maison</i><small>12</small>Ma</span></div><h2>Nous <em>trouver</em></h2><p class="sub">Le labo est ouvert. Venez goûter sur place ou commandez sans quitter le canapé.</p>
 <div class="find"><div class="side">
-<div class="ic"><b>☣ Adresse</b><p id="addr"></p><div class="adr"><a class="btn sm" id="itin" target="_blank" rel="noopener">Itinéraire</a><img src="/img/car.png" alt="" aria-hidden="true" width="640" height="275" loading="lazy"></div></div>
+<div class="ic"><b>☣ Adresse</b><p id="addr"></p><div class="adr"><a class="btn sm" id="itin" target="_blank" rel="noopener">Itinéraire →</a><a class="van" id="itin2" target="_blank" rel="noopener" aria-label="Itinéraire" tabindex="-1"><img src="/img/car.png" alt="" aria-hidden="true" width="640" height="275" loading="lazy"></a></div></div>
 <div class="ic"><b>Horaires</b><span id="open" class="st"></span><table id="hrs"></table></div>
 <div class="ic"><b>Contact</b><p id="tel" style="margin:0"></p><a class="btn sm" id="call">Appeler</a><p class="al2">Prix moyen : 10–20 € par personne<br>Sur place : salle à manger privée</p></div></div>
 <div class="mapw" id="mapw"><div id="map"></div><div class="chain"></div><div class="scan"></div><div class="radar"><i></i><i></i><i></i></div>
@@ -76,7 +76,7 @@ $('#bur').onclick=()=>$('.nav').classList.toggle('open');document.querySelectorA
 $('#pop').onclick=e=>{if(e.target.id==='pop')e.target.style.display='none'};
 function bottom(s){const sc=s.schedule||[],n=new Date(),d=(n.getDay()+6)%7,m=n.getHours()*60+n.getMinutes();
  $('#addr').textContent=s.address;$('#fa').textContent=s.address;const ph=(s.phone||'').replace(/[^\d+]/g,''),pl=ph?`<a href="tel:${ph}">${E(s.phone)}</a>`:'';$('#tel').innerHTML=pl||'Commande via Uber Eats';$('#call').style.display=ph?'':'none';$('#call').href='tel:'+ph;$('#fph').innerHTML=pl;
- $('#itin').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(s.address);
+ $('#itin').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(s.address);$('#itin2').href=$('#itin').href;
  $('#hrs').innerHTML=DJ.map((x,i)=>`<tr class="${i==d?'td':''}"><td>${x}</td><td>${E((sc[i]||'Fermé').replace(/\s*\/\s*/g,' · '))}</td></tr>`).join('');
  const o=rg(sc[d]).some(([a,b])=>b>a?m>=a&&m<b:m>=a)||rg(sc[(d+6)%7]).some(([a,b])=>b<=a&&m<b);
  $('#open').textContent=o?'Ouvert maintenant':'Fermé';{const hp=$('#hp');hp.textContent=o?'Ouvert maintenant':'Fermé actuellement';hp.className='pill'+(o?' on':'')}$('#open').className='st '+(o?'on':'off');
