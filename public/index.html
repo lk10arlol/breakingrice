@@ -27,7 +27,7 @@
 <div class="tape"></div>
 <section id="commander"><img class="dc d8" src="/img/masque3.png" alt="" aria-hidden="true" loading="lazy"><img class="dc d7" src="/img/fiole.png" alt="" aria-hidden="true" loading="lazy"><div class="order"><h2>Prêt à <em>cuisiner</em> ?</h2><p class="sub">Livraison ou à emporter via Uber Eats. Aucune trace, juste du crousty.</p><a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander maintenant</a></div></section>
 <section id="apropos"><div class="about"><div><h2>La <em>formule</em></h2><p id="about" style="max-width:640px"></p><div class="pur"><b>Pureté du crousty : 99,1 %</b><div><i></i></div></div></div><div id="m3"></div></div></section>
-<section id="avis"><h2>Avis <em>Google</em></h2><div class="gr"><span class="gl">Google</span><span id="gx"></span><span class="stars" id="gstars"></span><span id="gs"></span><span id="gv"></span><a class="btn sm" id="gw" target="_blank" rel="noopener">Écrire un avis</a></div><div class="rvw" id="rvl"></div><a id="ga" target="_blank" rel="noopener">Voir tous les avis sur Google</a></section>
+<section id="avis"><h2>Avis <em>Google</em></h2><div class="gr"><span class="gl">Google</span><span id="gx"></span><span class="stars" id="gstars"></span><span id="gs"></span><span id="gv"></span><a class="btn sm" id="gw" target="_blank" rel="noopener">Écrire un avis</a></div><div class="rvc"><button class="rb l" aria-label="Avis précédent">‹</button><div class="rvw" id="rvl"></div><button class="rb r" aria-label="Avis suivant">›</button></div><a id="ga" target="_blank" rel="noopener">Voir tous les avis sur Google</a></section>
 <div class="tape"></div>
 <section id="faq"><h2>Questions <em>fréquentes</em></h2><div class="faq" id="faqs"></div></section>
 <div class="tape"></div>
@@ -103,7 +103,16 @@ function reviews(g){g=g||{};const u=g.url||'https://maps.app.goo.gl/pcJ7JVmTiLGJ
  $('#ga').href=u;$('#gw').href=g.placeId?'https://search.google.com/local/writereview?placeid='+encodeURIComponent(g.placeId):u;
  $('#gx').textContent=g.rating>=4.5?'Excellent':g.rating>=4?'Très bien':'';$('#gstars').innerHTML=g.rating?st(g.rating)+'<i title="Avis Google">✔</i>':'';
  $('#gs').innerHTML=g.rating?`<b>${(+g.rating).toFixed(1).replace('.',',')}</b> / 5${g.count?' · '+(+g.count)+' avis':''}`:'';$('#gv').textContent=g.live?'✔ Avis vérifiés Google':'Avis publiés sur Google';
- $('#rvl').innerHTML='<div style="animation-duration:'+Math.max(30,L.length*9)+'s">'+[...L,...L].map(r=>`<div class="rc"><div class="rh"><span class="av">${E((r.name||'?')[0].toUpperCase())}</span><b>${E(r.name)}</b><span class="gg">G</span></div><div class="stars">${st(r.rating)}<i title="Avis Google">✔</i></div><p>${E(r.text)}</p>${r.date?'<small>'+E(r.date)+'</small>':''}</div>`).join('')+'</div>'}
+ $('#rvl').innerHTML='<div style="animation-duration:'+Math.max(30,L.length*9)+'s">'+[...L,...L].map(r=>`<div class="rc"><div class="rh"><span class="av">${E((r.name||'?')[0].toUpperCase())}</span><b>${E(r.name)}</b><span class="gg">G</span></div><div class="stars">${st(r.rating)}<i title="Avis Google">✔</i></div><p>${E(r.text)}</p>${r.date?'<small>'+E(r.date)+'</small>':''}</div>`).join('')+'</div>';scroller()}
+function scroller(){const sc=$('#rvl'),w=$('.rvc');if(!sc.querySelector('.rc'))return;let paused=false,hold=0,pos=0,last=performance.now(),tm;
+ const half=()=>sc.firstElementChild.scrollWidth/2,step=()=>sc.querySelector('.rc').offsetWidth+16;
+ const go=d=>{hold=performance.now()+900;if(d<0&&sc.scrollLeft<step())sc.scrollLeft+=half();sc.scrollBy({left:d*step(),behavior:'smooth'})};
+ w.querySelector('.l').onclick=()=>go(-1);w.querySelector('.r').onclick=()=>go(1);
+ w.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')paused=true});w.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')paused=false});
+ w.addEventListener('touchstart',()=>{paused=true;clearTimeout(tm)},{passive:true});w.addEventListener('touchend',()=>{tm=setTimeout(()=>paused=false,2500)},{passive:true});
+ (function tick(t){const dt=Math.min(t-last,100);last=t;
+  if(paused||t<hold||RM)pos=sc.scrollLeft;else{pos+=dt*.016;sc.scrollLeft=pos}
+  const h=half();if(h>0&&sc.scrollLeft>=h){sc.scrollLeft-=h;pos=sc.scrollLeft}requestAnimationFrame(tick)})(last)}
 function extras(s){
  const f=(s.faq||[]).filter(x=>x.q);reviews(s.google);$('#faqs').innerHTML=f.map(x=>`<details class="rv"><summary>${E(x.q)}</summary><p>${E(x.a)}</p></details>`).join('');if(!f.length)$('#faq').style.display='none';
  const so=s.socials||{},nm={instagram:'Instagram',tiktok:'TikTok',snapchat:'Snapchat',facebook:'Facebook'};
