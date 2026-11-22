@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — Breaking Rice</title><meta name="robots" content="noindex">
+<style>body{background:#070d07;color:#e9f5e1;font:15px system-ui;margin:0;padding:16px;max-width:900px;margin:auto}
+input,textarea,select,button{font:inherit;padding:8px;border-radius:6px;border:1px solid #2d6a1f;background:#101a10;color:#e9f5e1;width:100%;margin:4px 0}
+button{background:#7cf03a;color:#031003;font-weight:700;cursor:pointer;width:auto;padding:8px 16px;border:0}button.d{background:#c0392b;color:#fff}button.g{background:#2d6a1f;color:#fff}
+.box{background:#101a10;border:1px solid #2d6a1f;border-radius:8px;padding:14px;margin:12px 0}.row{display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px solid #1d3a18;padding:8px 0}
+.row img{width:44px;height:44px;object-fit:cover;border-radius:4px}label{display:block;font-size:.85rem;opacity:.8;margin-top:6px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+nav{display:flex;gap:8px;margin:12px 0}h1{color:#7cf03a}</style></head><body>
+<h1>Breaking Rice — Admin</h1><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let T=sessionStorage.t,items=[],S={},tab='menu';
+const api=async(m,u,b)=>{const r=await fetch('/api/'+u,{method:m,headers:{'Content-Type':'application/json',Authorization:'Bearer '+T},body:b?JSON.stringify(b):undefined});if(r.status==401&&u!=='login'){delete sessionStorage.t;T=null;return render()}const j=await r.json();if(!r.ok)throw Error(j.error||'Erreur');return j};
+const img=f=>new Promise(res=>{if(!f)return res('');const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,900/i.width),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8))};i.src=r.result};r.readAsDataURL(f)});
+async function render(){const a=$('#app');
+ if(!T){a.innerHTML='<div class="box"><input id=pw type=password placeholder="Mot de passe"><button id=go>Connexion</button> <span id=er style="color:#f66"></span></div>';
+  $('#go').onclick=async()=>{try{T=sessionStorage.t=(await api('POST','login',{password:$('#pw').value})).token;render()}catch(e){$('#er').textContent=e.message}};return}
+ items=await api('GET','admin/items');S=await api('GET','admin/settings');
+ a.innerHTML=`<nav><button class="${tab=='menu'?'':'g'}" onclick="tab='menu';render()">Menu</button><button class="${tab=='set'?'':'g'}" onclick="tab='set';render()">Popup, horaires, pages & infos</button><button class="d" onclick="delete sessionStorage.t;T=null;render()">Déconnexion</button></nav><div id=c></div>`;
+ tab=='menu'?menu():set()}
+function menu(){$('#c').innerHTML=`<div class=box><h3>Ajouter / modifier un plat</h3><input type=hidden id=id><div class=two><div><label>Nom</label><input id=n></div><div><label>Prix (€)</label><input id=p type=number step=.1></div></div>
+<label>Catégorie</label><select id=cat>${S.categories.map(c=>`<option>${E(c)}</option>`).join('')}</select><label>Description</label><textarea id=d rows=2></textarea>
+<div class=two><div><label>Allergènes</label><input id=al></div><div><label>Badge (ex : Nouveau)</label><input id=tg></div></div><label>Photo</label><input id=ph type=file accept="image/*"><label><input type=checkbox id=av checked style="width:auto"> Disponible</label>
+<button id=sv>Enregistrer</button> <button class=g onclick="menu()">Vider</button></div>
+<div class=box>${items.map(i=>`<div class=row><div style="display:flex;gap:10px;align-items:center">${i.photo?`<img src="${E(i.photo)}">`:''}<div><b>${E(i.name)}</b> — ${(+i.price).toFixed(2)} €<br><small>${E(i.category)}${i.available?'':' · masqué'}</small></div></div><div><button class=g onclick="edit('${i._id}')">Éditer</button> <button class=d onclick="del('${i._id}')">X</button></div></div>`).join('')}</div>`;
+ $('#sv').onclick=async()=>{const o={name:$('#n').value,price:+$('#p').value,category:$('#cat').value,description:$('#d').value,allergens:$('#al').value,tag:$('#tg').value,available:$('#av').checked};const f=$('#ph').files[0];if(f)o.photo=await img(f);const id=$('#id').value;
+  await api(id?'PUT':'POST','admin/items'+(id?'/'+id:''),o);render()}}
+window.edit=id=>{const i=items.find(x=>x._id==id);$('#id').value=id;$('#n').value=i.name;$('#p').value=i.price;$('#cat').value=i.category;$('#d').value=i.description||'';$('#al').value=i.allergens||'';$('#tg').value=i.tag||'';$('#av').checked=i.available;scrollTo(0,0)};
+window.del=async id=>{if(confirm('Supprimer ?')){await api('DELETE','admin/items/'+id);render()}};
+const DJ=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],slug=t=>t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'page';
+const col=()=>({...S,popup:{...S.popup,enabled:$('#pe').checked,title:$('#pt').value,text:$('#px').value},banner:{enabled:$('#be').checked,text:$('#bt').value},uberUrl:$('#u').value,about:$('#ab').value,address:$('#ad').value,phone:$('#tl').value,lat:parseFloat($('#la').value)||null,lng:parseFloat($('#ln').value)||null,categories:$('#ct').value.split(',').map(x=>x.trim()).filter(Boolean),schedule:[...document.querySelectorAll('.sc')].map(x=>x.value),pages:[...document.querySelectorAll('.pg')].map(q=>({title:q.querySelector('.t2').value,slug:slug(q.querySelector('.t2').value),text:q.querySelector('.x2').value,show:q.querySelector('.v2').checked}))});
+function set(){const p=S.popup,b=S.banner,sc=S.schedule||[];$('#c').innerHTML=`<div class=box><h3>Popup (avertissement / promo)</h3><label><input type=checkbox id=pe style="width:auto" ${p.enabled?'checked':''}> Activer</label><input id=pt placeholder="Titre" value="${E(p.title)}"><textarea id=px rows=3 placeholder="Texte">${E(p.text)}</textarea><label>Image</label><input id=pi type=file accept="image/*"></div>
+<div class=box><h3>Bandeau promo (haut de page)</h3><label><input type=checkbox id=be style="width:auto" ${b.enabled?'checked':''}> Activer</label><input id=bt value="${E(b.text)}"></div>
+<div class=box><h3>Horaires</h3><small>Format : 11:30-15:00 / 18:00-01:00 (après minuit accepté) ou Fermé</small>${DJ.map((d,i)=>`<label>${d}</label><input class=sc value="${E(sc[i]||'')}">`).join('')}</div>
+<div class=box><h3>Infos du site</h3><label>Lien Uber Eats</label><input id=u value="${E(S.uberUrl)}"><label>Texte « La formule » (à propos)</label><textarea id=ab rows=4>${E(S.about)}</textarea><label>Adresse</label><input id=ad value="${E(S.address)}"><div class=two><div><label>Latitude (carte)</label><input id=la value="${S.lat||''}"></div><div><label>Longitude (carte)</label><input id=ln value="${S.lng||''}"></div></div><small>Laissez vide pour un calcul automatique depuis l'adresse.</small><label>Téléphone</label><input id=tl value="${E(S.phone)}"><label>Catégories du menu (séparées par des virgules)</label><input id=ct value="${E(S.categories.join(', '))}"></div>
+<div class=box><h3>Pages (liens du pied de page)</h3>${(S.pages||[]).map((x,i)=>`<div class=pg style="border-bottom:1px solid #1d3a18;padding-bottom:10px"><label><input type=checkbox class=v2 style="width:auto" ${x.show?'checked':''}> Afficher</label><input class=t2 value="${E(x.title)}"><textarea class=x2 rows=5>${E(x.text)}</textarea><button class="d dp" data-i=${i}>Supprimer cette page</button></div>`).join('')}<button class=g id=ap>+ Ajouter une page</button></div><button id=ss>Enregistrer</button>`;
+ $('#ap').onclick=()=>{S=col();S.pages.push({title:'Nouvelle page',slug:'nouvelle-page',text:'',show:true});set()};
+ document.querySelectorAll('.dp').forEach(x=>x.onclick=()=>{S=col();S.pages.splice(+x.dataset.i,1);set()});
+ $('#ss').onclick=async()=>{const o=col(),f=$('#pi').files[0];if(f)o.popup.image=await img(f);await api('PUT','admin/settings',o);alert('Enregistré');render()}}
+render();
+</script></body></html>

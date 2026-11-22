@@ -22,7 +22,7 @@ header{position:sticky;top:0;z-index:20;background:#060a05ee;backdrop-filter:blu
 .tape{height:22px;background:repeating-linear-gradient(-45deg,var(--y) 0 18px,#111 18px 36px);opacity:.9;margin:0}
 .hero{min-height:90vh;display:grid;place-items:center;text-align:center;padding:60px 5vw;position:relative;overflow:hidden}
 .hero p.t{max-width:600px;margin:22px auto;opacity:.9;font-size:1.1rem}.hero p.t b{color:var(--y)}
-.mol{position:absolute;opacity:.55;pointer-events:none}.mol path,.mol polygon{fill:none;stroke:#fff;stroke-width:1.4;stroke-dasharray:420;animation:dr 6s ease forwards}.mol text{fill:#fff;font:11px Oswald;text-anchor:middle}
+.mol{position:absolute;opacity:.55;pointer-events:none}.molsvg path,.molsvg polygon{fill:none;stroke:#fff;stroke-width:1.5;stroke-dasharray:420;animation:dr 6s ease forwards}.molsvg text{fill:#fff;font:12px Oswald;text-anchor:middle}
 @keyframes dr{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
 .btn{display:inline-block;background:var(--y);color:#111;padding:14px 34px;border-radius:3px;text-decoration:none;font-weight:700;font-size:1.1rem;border:0;cursor:pointer;transition:.2s;position:relative;overflow:hidden;margin:6px}
 .btn:hover{transform:translateY(-3px) rotate(-1deg);background:var(--g);box-shadow:0 0 30px #7cf03acc,0 6px 0 #0a3a0a}.btn:active{transform:translateY(2px)}
@@ -41,16 +41,29 @@ h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:6px}h2 em{color:var(--g);font-
 .card p{font-size:.85rem;opacity:.8}.tag{align-self:flex-start;background:var(--g);color:#031003;font:700 .7rem Oswald;padding:2px 8px;border-radius:3px;text-transform:uppercase}.al{font-size:.72rem;opacity:.55}
 .order{text-align:center;background:linear-gradient(135deg,#0f3d12cc,#07140acc);border:2px solid var(--y);border-radius:12px;padding:50px 20px;box-shadow:0 0 50px #f2c94c22}
 .about{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}@media(max-width:700px){.about{grid-template-columns:1fr}}
-.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.info div{background:var(--card);padding:22px;border-radius:8px;border-left:4px solid var(--y)}
-footer{text-align:center;padding:40px 5vw 90px;border-top:2px solid var(--y);font-size:.8rem;opacity:.8;background:#060a05cc}footer a{color:var(--g)}
+.find{display:grid;grid-template-columns:minmax(280px,1fr) 1.5fr;gap:22px}@media(max-width:850px){.find{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:16px}.ic{background:linear-gradient(180deg,#0f1a0e,#080d07);border:1px solid var(--g2);border-left:5px solid var(--y);border-radius:8px;padding:18px}
+.ic b{font:600 1.1rem Oswald;text-transform:uppercase;letter-spacing:.06em;color:var(--y);display:block;margin-bottom:6px}.ic p{margin-bottom:10px}.ic a{color:var(--g)}
+.btn.sm{padding:8px 18px;font-size:.9rem;margin:0;color:#111}
+#hrs{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}#hrs td{padding:4px 0;border-bottom:1px dashed #1f5a1799}#hrs td:last-child{text-align:right}#hrs .td{color:var(--g);font-weight:bold}
+.st{float:right;font:700 .75rem Oswald;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}.st.on{background:var(--g);color:#031003;box-shadow:0 0 12px #7cf03a}.st.off{background:#7a1f1f;color:#fff}
+.mapw{position:relative;border:4px solid var(--y);border-radius:10px;overflow:hidden;box-shadow:0 0 0 4px #111,0 0 40px #f2c94c33;min-height:440px}
+#map{height:100%;min-height:440px;background:#0a1209}.mapw .leaflet-tile-pane{filter:grayscale(1) sepia(1) hue-rotate(52deg) saturate(3.2) brightness(1.05) contrast(1.15)}
+.chain{position:absolute;inset:0;pointer-events:none;z-index:500;background:repeating-linear-gradient(45deg,transparent 0 11px,#ffffff14 11px 12px),repeating-linear-gradient(-45deg,transparent 0 11px,#ffffff14 11px 12px);box-shadow:inset 0 0 70px #000}
+.lab{position:absolute;left:0;bottom:0;z-index:501;background:var(--y);color:#111;font:700 .8rem Oswald;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px}
+.pn{width:44px;height:44px;border-radius:50%;background:var(--y);color:#111;display:grid;place-items:center;font-size:26px;border:3px solid #111;box-shadow:0 0 0 3px var(--y),0 0 30px #f2c94c;animation:pl 2s infinite}@keyframes pl{50%{box-shadow:0 0 0 8px #f2c94c55,0 0 45px #f2c94c}}
+.mapw .leaflet-popup-content-wrapper,.mapw .leaflet-popup-tip{background:#0d150c;color:#fff;border:1px solid var(--y);font-family:'Special Elite',monospace}
+footer{background:#050804f2;padding:50px 5vw 80px;font-size:.85rem}.fg{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}@media(max-width:700px){.fg{grid-template-columns:1fr}}
+footer h4{font:700 1rem Oswald;letter-spacing:.1em;text-transform:uppercase;color:var(--y);margin-bottom:10px}footer a{display:block;color:var(--t);text-decoration:none;padding:2px 0;transition:.2s}footer a:hover{color:var(--g);transform:translateX(4px)}
+#hf .bb.sm{font-size:2rem;justify-content:flex-start}.fs{margin-top:14px;opacity:.7}.fb{max-width:1200px;margin:30px auto 0;padding-top:16px;border-top:1px dashed var(--g2);text-align:center;opacity:.6;font-size:.75rem}
 .fab{position:fixed;bottom:16px;right:16px;z-index:30;box-shadow:0 0 25px #f2c94c88}
 #pop{position:fixed;inset:0;background:#000c;display:none;place-items:center;z-index:50;padding:20px}
-#pop .box{background:var(--card);border:3px solid var(--y);border-radius:10px;max-width:440px;width:100%;padding:26px;text-align:center;position:relative;box-shadow:0 0 60px #f2c94c44}#pop img{max-width:100%;border-radius:6px;margin-bottom:12px}
+#pop .box{background:var(--card);border:3px solid var(--y);border-radius:10px;max-width:440px;max-height:85vh;overflow:auto;width:100%;padding:26px;text-align:center;position:relative;box-shadow:0 0 60px #f2c94c44}#pop img{max-width:100%;border-radius:6px;margin-bottom:12px}
 #pop .x{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--t);font-size:1.8rem;cursor:pointer}
 @media(prefers-reduced-motion:reduce){#bg{display:none}*{animation:none!important}}
 </style></head><body>
 <canvas id="bg"></canvas><div id="banner"></div>
-<header><div id="hl"></div><nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Infos</a></nav></header>
+<header><div id="hl"></div><nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Nous trouver</a></nav></header>
 <main>
 <div class="hero"><div class="mol" id="m1" style="left:2%;top:10%"></div><div class="mol" id="m2" style="right:1%;bottom:6%"></div>
 <div><div id="hh"></div><div class="sub1">Poulet Crousty · Mérignac</div>
@@ -61,9 +74,19 @@ footer{text-align:center;padding:40px 5vw 90px;border-top:2px solid var(--y);fon
 <div class="tape"></div>
 <section id="commander"><div class="order"><h2>Prêt à <em>cuisiner</em> ?</h2><p class="sub">Livraison ou à emporter via Uber Eats. Aucune trace, juste du crousty.</p><a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander maintenant</a></div></section>
 <section id="apropos"><div class="about"><div><h2>La <em>formule</em></h2><p id="about" style="max-width:640px"></p></div><div id="m3"></div></div></section>
-<section id="infos"><h2>Infos <em>pratiques</em></h2><div class="info"><div><h3>Adresse</h3><p id="addr"></p></div><div><h3>Horaires</h3><p id="hrs"></p></div><div><h3>Contact</h3><p id="tel"></p></div></div></section>
+<div class="tape"></div>
+<section id="infos"><h2>Nous <em>trouver</em></h2><p class="sub">Le labo est ouvert. Venez goûter sur place ou commandez sans quitter le canapé.</p>
+<div class="find"><div class="side">
+<div class="ic"><b>☣ Adresse</b><p id="addr"></p><a class="btn sm" id="itin" target="_blank" rel="noopener">Itinéraire</a></div>
+<div class="ic"><b>Horaires</b><span id="open" class="st"></span><table id="hrs"></table></div>
+<div class="ic"><b>Contact</b><p id="tel" style="margin:0"></p></div></div>
+<div class="mapw"><div id="map"></div><div class="chain"></div><div class="lab">☣ Zone de production · accès autorisé</div></div></div></section>
 </main>
-<footer><div id="hf" style="margin-bottom:14px"></div>© <span id="yr"></span> Breaking Rice — Site non affilié à AMC/Sony. Allergènes : demandez-nous la liste complète. · <a href="/admin">Admin</a></footer>
+<div class="tape"></div>
+<footer><div class="fg"><div><div id="hf"></div><p class="fs">Riz thaï, poulet crousty, sauces maison.<br>Pureté : 99,1 %.<br><span id="fa"></span></p></div>
+<div><h4>Explorer</h4><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Nous trouver</a></div>
+<div><h4>Infos</h4><div id="fp"></div><a data-uber target="_blank" rel="noopener" href="#">Uber Eats</a></div></div>
+<div class="fb">© <span id="yr"></span> Breaking Rice — Site non affilié à AMC/Sony. Allergènes : demandez-nous la liste complète.</div></footer>
 <a class="btn fab" href="#" data-uber target="_blank" rel="noopener">Commander</a>
 <div id="pop"><div class="box"><button class="x" onclick="pop.style.display='none'">×</button><div id="pc"></div></div></div>
 <script>
@@ -72,7 +95,7 @@ const bb=(t,c='')=>`<${t} class="bb ${c}"><span><span class="el"><i>Barkim</i><s
 $('#hl').innerHTML=bb('div','sm');$('#hh').innerHTML=bb('h1');$('#hf').innerHTML=bb('div','sm');$('#yr').textContent=new Date().getFullYear();
 const mol=()=>{const r=34,w=r*1.732,hx=(x,y)=>[0,1,2,3,4,5].map(i=>{const a=Math.PI/180*(60*i-30);return(x+r*Math.cos(a)).toFixed(1)+','+(y+r*Math.sin(a)).toFixed(1)}).join(' ');
  const H=[[70,60,'Riz'],[70+w,60,'Poulet'],[70+w/2,60+1.5*r,'Oignons'],[70+w*1.5,60+1.5*r,'Sauce'],[70+w,60+3*r,'Thaï'],[70+w*2,60+3*r,'Fromage']];
- return`<svg viewBox="0 0 290 240" width="100%" style="max-width:300px">${H.map(([x,y,l])=>`<polygon points="${hx(x,y)}"/><text x="${x}" y="${y+4}">${l}</text>`).join('')}<path d="M${70+w*2+r*.87} ${60+3*r} l30 -18 M${70-w/2} ${60-r*.5} l-20 -14"/><text x="${70+w*2+60}" y="${60+3*r-14}">NH₂</text><text x="22" y="30">C₁₀H₁₅N</text></svg>`};
+ return`<svg class="molsvg" viewBox="0 0 290 240" width="100%" style="max-width:300px">${H.map(([x,y,l])=>`<polygon points="${hx(x,y)}"/><text x="${x}" y="${y+4}">${l}</text>`).join('')}<path d="M${70+w*2+r*.87} ${60+3*r} l30 -18 M${70-w/2} ${60-r*.5} l-20 -14"/><text x="${70+w*2+60}" y="${60+3*r-14}">NH₂</text><text x="22" y="30">C₁₀H₁₅N</text></svg>`};
 $('#m1').innerHTML=mol();$('#m2').innerHTML=mol();$('#m3').innerHTML=mol();document.querySelectorAll('.mol').forEach(m=>m.style.width='min(300px,30vw)');$('#m3').style.opacity=.8;
 const cv=$('#bg'),cx=cv.getContext('2d');let W,H,P=[],L=[];const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
 const TXT=['Br','Ri','C₁₀H₁₅N','H₂O','NaCl','Ba','Cl₂','C₆H₁₂O₆','35','15','CH₃','NH₂','⌬','O₂','Na','C₈H₁₀N₄O₂','Se','Ni','99,1%','Cu'];
@@ -87,9 +110,25 @@ const smoke=(x,y,n=1,c)=>{for(let i=0;i<n&&P.length<170;i++)P.push({x,y,vx:(Math
 let lt=0;addEventListener('pointermove',e=>{if(Date.now()-lt<90)return;lt=Date.now();const t=e.target.closest('.btn,button,.card,.nav a');if(t)smoke(e.clientX,e.clientY,1,t.matches('.card')?'124,240,58':'242,201,76')});
 addEventListener('click',e=>{smoke(e.clientX,e.clientY,6);for(let i=0;i<3&&L.length<70;i++){const l=mk(e.clientX+(Math.random()-.5)*60,e.clientY);l.a=.35;L.push(l)}});
 addEventListener('keydown',e=>{if(e.key.length===1&&L.length<70){const l=mk();l.t=e.key.toUpperCase();l.a=.4;l.s=40;L.push(l)}});
+const DJ=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+const rg=t=>String(t||'').split('/').map(x=>x.trim().match(/(\d{1,2})[:hH](\d{2})\s*-\s*(\d{1,2})[:hH](\d{2})/)).filter(Boolean).map(m=>[+m[1]*60+ +m[2],+m[3]*60+ +m[4]]);
+$('#pop').onclick=e=>{if(e.target.id==='pop')e.target.style.display='none'};
+function bottom(s){const sc=s.schedule||[],n=new Date(),d=(n.getDay()+6)%7,m=n.getHours()*60+n.getMinutes();
+ $('#addr').textContent=s.address;$('#fa').textContent=s.address;$('#tel').innerHTML=s.phone?`<a href="tel:${E(s.phone)}">${E(s.phone)}</a>`:'Commande via Uber Eats';
+ $('#itin').href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(s.address);
+ $('#hrs').innerHTML=DJ.map((x,i)=>`<tr class="${i==d?'td':''}"><td>${x}</td><td>${E((sc[i]||'Fermé').replace(/\s*\/\s*/g,' · '))}</td></tr>`).join('');
+ const o=rg(sc[d]).some(([a,b])=>b>a?m>=a&&m<b:m>=a)||rg(sc[(d+6)%7]).some(([a,b])=>b<=a&&m<b);
+ $('#open').textContent=o?'Ouvert maintenant':'Fermé';$('#open').className='st '+(o?'on':'off');
+ const PG=s.pages||[];$('#fp').innerHTML=PG.filter(x=>x.show).map(x=>`<a href="#" data-p="${E(x.slug)}">${E(x.title)}</a>`).join('');
+ $('#fp').onclick=e=>{const a=e.target.closest('[data-p]');if(!a)return;e.preventDefault();const p=PG.find(x=>x.slug===a.dataset.p);$('#pc').innerHTML=`<h2>${E(p.title)}</h2><p style="text-align:left;white-space:pre-wrap;font-size:.9rem">${E(p.text)}</p>`;$('#pop').style.display='grid'};
+ const go=()=>{const ll=[s.lat||44.8386,s.lng||-0.6436],mp=L.map('map',{scrollWheelZoom:false}).setView(ll,s.lat?16:13);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',maxZoom:19}).addTo(mp);
+  L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="pn">☣</div>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(mp).bindPopup('<b>Breaking Rice</b><br>'+E(s.address)).openPopup()};
+ const c=document.createElement('link');c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.append(c);
+ const j=document.createElement('script');j.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';j.onload=go;document.head.append(j)}
 fetch('/api/menu').then(r=>r.json()).then(({items,settings:s})=>{
  document.querySelectorAll('[data-uber]').forEach(a=>a.href=s.uberUrl);
- $('#about').textContent=s.about;$('#addr').textContent=s.address;$('#hrs').textContent=s.hours;$('#tel').textContent=s.phone||'Via Uber Eats';
+ $('#about').textContent=s.about;bottom(s);
  if(s.banner?.enabled&&s.banner.text){$('#banner').style.display='block';$('#banner').textContent=s.banner.text}
  const cats=s.categories.filter(c=>items.some(i=>i.category===c));let cur=cats[0];
  const draw=()=>{$('#tabs').innerHTML=cats.map(c=>`<button class="${c===cur?'on':''}" data-c="${E(c)}">${E(c)}</button>`).join('');
