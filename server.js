@@ -3,7 +3,7 @@ const app=express();app.use(express.json({limit:'6mb'}));
 const {MONGODB_URI,ADMIN_PASSWORD}=process.env;
 if(!MONGODB_URI||!ADMIN_PASSWORD){console.error('MONGODB_URI et ADMIN_PASSWORD requis');process.exit(1)}
 const Item=mongoose.model('Item',new mongoose.Schema({name:String,category:String,description:String,price:Number,photo:String,allergens:String,tag:String,available:{type:Boolean,default:true},order:{type:Number,default:0}}));
-const DEF={categories:['Crousty','Sandwichs','Tenders & Wings','Menus','Accompagnements','Sauces','Boissons','Desserts'],uberUrl:'https://www.ubereats.com/fr/store/breaking-rice-poulet-crousty-merignac/i6V0LUxyV96WUOl3v3YT_g',about:'Chez Breaking Rice, on cuisine le poulet crousty avec une pureté de 99,1 %. Riz parfumé, poulet croustillant, sauces maison : une formule qui ne laisse aucune trace… sauf dans votre mémoire.',hours:'Lun–Dim : 11h30 – 23h00',address:'Mérignac (33700)',phone:'',popup:{enabled:false,title:'',text:'',image:''},banner:{enabled:false,text:''}};
+const DEF={categories:['Menus','Riz Crousty Original','Riz Crousty Gratiné','Burgers','Extras','Desserts','Boissons'],uberUrl:'https://www.ubereats.com/fr/store/breaking-rice-poulet-crousty-merignac/i6V0LUxyV96WUOl3v3YT_g',about:'Chez Breaking Rice, on cuisine le poulet crousty avec une pureté de 99,1 %. Riz parfumé, poulet croustillant, sauces maison : une formule qui ne laisse aucune trace… sauf dans votre mémoire.',hours:'Lun–Dim : 11h30 – 23h00',address:'Mérignac (33700)',phone:'',popup:{enabled:false,title:'',text:'',image:''},banner:{enabled:false,text:''}};
 const Settings=mongoose.model('Settings',new mongoose.Schema({_id:String,data:Object},{minimize:false}));
 const getS=async()=>({...DEF,...((await Settings.findById('main'))?.data||{})});
 const sign=e=>{const p=String(e);return p+'.'+crypto.createHmac('sha256',ADMIN_PASSWORD).update(p).digest('hex')};
@@ -22,11 +22,22 @@ app.put('/api/admin/settings',auth,async(q,r)=>{await Settings.findByIdAndUpdate
 app.use(express.static('public'));
 app.get('/admin',(q,r)=>r.sendFile(__dirname+'/public/admin.html'));
 mongoose.connect(MONGODB_URI).then(async()=>{
- if(!await Item.countDocuments())await Item.insertMany([
-  ['Crousty Classique','Crousty','Riz, poulet frit croustillant, sauce au choix',9],
-  ['Méga Crousty','Crousty','Double portion de poulet, riz parfumé, sauce au choix',12],
-  ['Tenders x6','Tenders & Wings','6 tenders de poulet panés',7],
-  ['Frites','Accompagnements','Frites croustillantes',3],
-  ['Soda 33cl','Boissons','Au choix',2],
-  ['Brownie','Desserts','Brownie fondant',3]].map(([name,category,description,price],i)=>({name,category,description,price,order:i,tag:i==0?'Best-seller':''})));
+ const old=['Crousty Classique','Méga Crousty','Tenders x6','Frites','Soda 33cl','Brownie'],n=await Item.countDocuments();
+ if(n===0||(n===6&&await Item.countDocuments({name:{$in:old}})===6)){await Item.deleteMany({});
+  const B='Servis avec une boisson. Riz thaï, poulet crousty, oignons crispy, sauce blanche maison et sauce thaï.',G=x=>'Riz crousty gratiné '+x+'.';
+  await Item.insertMany([
+  ['Menus','Menu Riz Poulet Crousty + Boisson',13.5,B,'Best-seller'],['Menus','Menu Riz Crousty Gratiné',14.9,B,''],['Menus','Menu Burger Poulet Crousty + Frites',11.5,'Servis avec des frites. Burger brioché au choix.',''],
+  ['Riz Crousty Original','Riz Crousty Original (L)',11.9,'',''],['Riz Crousty Original','Riz Crousty Deal (L)',14.9,'',''],
+  ['Riz Crousty Original','Riz Crousty Végé (L)',11.9,'Riz thaï, falafels, oignons crispy, sauce blanche maison et sauce aigre douce.','Végé'],
+  ['Riz Crousty Original','Riz Poulet HEALTHY (L)',13.9,'Poulet mariné, fait maison et cuit sur la plancha, taille L.','Healthy'],
+  ['Riz Crousty Gratiné','Riz Crousty Gratiné Cheddar Deal',15.5,G('Cheddar'),''],['Riz Crousty Gratiné','Riz Crousty Gratiné Cheddar',13.9,G('Cheddar'),''],
+  ['Riz Crousty Gratiné','Riz Crousty Gratiné Mozzarella',13.9,G('Mozzarella'),''],['Riz Crousty Gratiné','Riz Crousty Gratiné Raclette',13.9,G('raclette'),''],['Riz Crousty Gratiné','Riz Crousty Gratiné Emmental',13.9,G('Emmental'),''],
+  ['Burgers','Jesse Burger',8.9,'Bun brioché, poulet pané, Cheddar fondant, salade verte, chou rouge, cornichons et sauce à l\'ail.',''],
+  ['Burgers','Breaking BBQ Burger',8.9,'Bun brioché, poulet pané, sauce barbecue, Cheddar, salade, chou rouge, tomates et cornichons.',''],
+  ['Burgers','Walter Burger',8.9,'Bun brioché, poulet pané, mayonnaise, Cheddar, salade et cornichons.',''],
+  ['Extras','Frites',3.5,'Frites nature - sauces accompagnement au choix.',''],['Extras','Tenders de Poulet',8.9,'2 pièces.',''],
+  ['Desserts','Tiramisu',3.5,'Tiramisu spéculoos.',''],
+  ['Boissons','Coca-Cola',3,'Coca-Cola original.',''],['Boissons','Coca-Cola Zéro',3,'Coca-Cola zéro.',''],['Boissons','Ice Tea',3,'Ice tea pêche.',''],['Boissons','Fanta',3,'Fanta orange.',''],
+  ['Boissons','Red Bull',3,'Red Bull original.',''],['Boissons','Oasis Tropical',3,'Oasis tropical.',''],['Boissons','Eau',3,'Eau plate.','']
+  ].map(([category,name,price,description,tag],i)=>({category,name,price,description,tag,order:i})))}
  app.listen(process.env.PORT||3000,()=>console.log('OK'))}).catch(e=>{console.error(e);process.exit(1)});

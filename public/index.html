@@ -1,73 +1,101 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Breaking Rice — Poulet Crousty à Mérignac</title>
-<meta name="description" content="Breaking Rice : poulet crousty, riz et sauces maison à Mérignac. Commandez sur Uber Eats.">
+<meta name="description" content="Breaking Rice : riz crousty, burgers et poulet pané à Mérignac. Pur à 99,1 %. Commandez sur Uber Eats.">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-:root{--g:#7cf03a;--g2:#2d6a1f;--bg:#070d07;--card:#101a10;--t:#e9f5e1;--y:#f2c94c}
-*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
-body{background:radial-gradient(circle at 20% 0,#12240f,var(--bg) 60%);color:var(--t);font:16px/1.6 'Special Elite',monospace}
-h1,h2,h3,.nav a,.btn{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
-.tile{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid var(--g);background:#0c3a10;color:#fff;border-radius:6px;position:relative;box-shadow:0 0 18px #7cf03a55}
-.tile small{position:absolute;top:3px;left:6px;font:600 .7em Oswald}.tile b{font:700 2.6em/1 Oswald}.tile i{font:normal .6em Oswald;opacity:.8}
-.logo{display:flex;gap:6px;align-items:center}.logo .tile{width:54px;height:54px;font-size:14px}
-header{position:sticky;top:0;z-index:20;background:#070d07ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--g2);display:flex;justify-content:space-between;align-items:center;padding:8px 5vw}
-.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:var(--t);text-decoration:none;font-size:.95rem}.nav a:hover{color:var(--g)}
-#banner{background:var(--y);color:#111;text-align:center;padding:8px;font:600 1rem Oswald;display:none}
-.hero{min-height:88vh;display:grid;place-items:center;text-align:center;padding:60px 5vw;position:relative;overflow:hidden}
-.hero .logo{justify-content:center;margin-bottom:20px}.hero .logo .tile{width:clamp(90px,22vw,150px);height:clamp(90px,22vw,150px);font-size:clamp(20px,5vw,34px)}
-.hero h1{font-size:clamp(2.4rem,8vw,5.5rem);line-height:1}.hero h1 span{color:var(--g);text-shadow:0 0 25px #7cf03a88}
-.hero p{max-width:560px;margin:18px auto;opacity:.85}
-.btn{display:inline-block;background:var(--g);color:#031003;padding:14px 34px;border-radius:4px;text-decoration:none;font-weight:700;font-size:1.1rem;border:0;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);box-shadow:0 0 25px #7cf03a99}
-.btn.o{background:transparent;color:var(--g);border:2px solid var(--g)}
-.float{position:absolute;opacity:.12;font:700 7rem Oswald;color:var(--g);user-select:none;pointer-events:none}
+:root{--g:#7cf03a;--g2:#1f5a17;--y:#f2c94c;--bg:#060a05;--card:#0d150c;--t:#eef7e6}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;background:var(--bg)}
+body{color:var(--t);font:16px/1.6 'Special Elite',monospace;background:radial-gradient(ellipse at 85% 0,#e8b92326,transparent 50%),radial-gradient(ellipse at 0 100%,#7cf03a1c,transparent 50%);overflow-x:hidden}
+h1,h2,h3,.nav a,.btn,#tabs button{font-family:Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}main,header,footer{position:relative;z-index:1}
+body:after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,#000c 100%)}
+.bb{font:700 clamp(2.8rem,10vw,6.4rem)/1 Helvetica,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;gap:.12em;color:#fff;text-transform:none;letter-spacing:-.02em;text-shadow:0 4px 0 #000,0 0 30px #7cf03a44}
+.bb .el{display:inline-block;position:relative;background:linear-gradient(160deg,#2fae3f,#0f4d1a);border:.05em solid #fff;border-radius:.06em;padding:0 .14em .2em;margin-right:.03em;box-shadow:inset 0 0 .3em #0008,0 0 .5em #7cf03a99,0 0 2em #7cf03a55;animation:fl 4s infinite}
+.bb .el i,.bb .el small{position:absolute;bottom:.03em;font:normal 700 .17em Arial,sans-serif;text-shadow:none}.bb .el i{left:.2em}.bb .el small{right:.2em}
+.bb.sm{flex-direction:row;font-size:1.45rem;gap:.35em;text-shadow:none}.bb.sm .el{border-width:2px;box-shadow:0 0 12px #7cf03a88}
+@keyframes fl{0%,92%,100%{filter:none}94%{filter:brightness(1.6)}96%{filter:brightness(.7)}98%{filter:brightness(1.4)}}
+.sub1{font:600 clamp(.9rem,2.4vw,1.3rem) Oswald;letter-spacing:.4em;color:var(--y);margin-top:14px;text-transform:uppercase}
+header{position:sticky;top:0;z-index:20;background:#060a05ee;backdrop-filter:blur(8px);border-bottom:2px solid var(--y);display:flex;justify-content:space-between;align-items:center;padding:8px 5vw}
+.nav{display:flex;gap:20px;flex-wrap:wrap}.nav a{color:var(--t);text-decoration:none;font-size:.95rem;display:inline-block}.nav a:hover{color:var(--y);animation:wob .4s}
+@keyframes wob{25%{transform:rotate(-4deg) scale(1.1)}75%{transform:rotate(4deg) scale(1.1)}}
+#banner{background:var(--y);color:#111;text-align:center;padding:8px;font:600 1rem Oswald;display:none;position:relative;z-index:21}
+.tape{height:22px;background:repeating-linear-gradient(-45deg,var(--y) 0 18px,#111 18px 36px);opacity:.9;margin:0}
+.hero{min-height:90vh;display:grid;place-items:center;text-align:center;padding:60px 5vw;position:relative;overflow:hidden}
+.hero p.t{max-width:600px;margin:22px auto;opacity:.9;font-size:1.1rem}.hero p.t b{color:var(--y)}
+.mol{position:absolute;opacity:.55;pointer-events:none}.mol path,.mol polygon{fill:none;stroke:#fff;stroke-width:1.4;stroke-dasharray:420;animation:dr 6s ease forwards}.mol text{fill:#fff;font:11px Oswald;text-anchor:middle}
+@keyframes dr{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.btn{display:inline-block;background:var(--y);color:#111;padding:14px 34px;border-radius:3px;text-decoration:none;font-weight:700;font-size:1.1rem;border:0;cursor:pointer;transition:.2s;position:relative;overflow:hidden;margin:6px}
+.btn:hover{transform:translateY(-3px) rotate(-1deg);background:var(--g);box-shadow:0 0 30px #7cf03acc,0 6px 0 #0a3a0a}.btn:active{transform:translateY(2px)}
+.btn.o{background:transparent;color:var(--y);border:2px solid var(--y)}.btn.o:hover{color:#031003}
 section{padding:80px 5vw;max-width:1200px;margin:auto}
-h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:6px}h2 em{color:var(--g);font-style:normal}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:6px}h2 em{color:var(--g);font-style:normal;text-shadow:0 0 18px #7cf03a77}
 .sub{opacity:.7;margin-bottom:28px}
 #tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-#tabs button{background:var(--card);color:var(--t);border:1px solid var(--g2);padding:8px 16px;font:600 .95rem Oswald;text-transform:uppercase;cursor:pointer;border-radius:4px}#tabs button.on{background:var(--g);color:#031003}
+#tabs button{background:var(--card);color:var(--t);border:1px solid var(--g2);padding:9px 18px;font-size:.95rem;cursor:pointer;border-radius:3px;transition:.15s}#tabs button:hover{border-color:var(--y);color:var(--y);transform:translateY(-2px)}#tabs button.on{background:var(--g);color:#031003;box-shadow:0 0 18px #7cf03a88}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-.card{background:var(--card);border:1px solid var(--g2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}.card:hover{border-color:var(--g)}
+.card{background:linear-gradient(180deg,#0f1a0e,#080d07);border:1px solid var(--g2);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:.25s;animation:in .5s both}
+.card:hover{border-color:var(--y);transform:translateY(-6px) rotate(-.4deg);box-shadow:0 10px 30px #f2c94c30,0 0 25px #7cf03a30}
+@keyframes in{from{opacity:0;transform:translateY(20px)}}
 .card img{width:100%;height:170px;object-fit:cover}.card .b{padding:14px;flex:1;display:flex;flex-direction:column;gap:6px}
-.card h3{font-size:1.2rem;display:flex;justify-content:space-between;gap:10px}.card h3 span{color:var(--g)}
-.card p{font-size:.85rem;opacity:.8}.tag{align-self:flex-start;background:var(--y);color:#111;font:600 .7rem Oswald;padding:2px 8px;border-radius:3px;text-transform:uppercase}.al{font-size:.72rem;opacity:.55}
-.order{text-align:center;background:linear-gradient(135deg,#0c3a10,#07140a);border:2px solid var(--g);border-radius:12px;padding:50px 20px}
-.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.info div{background:var(--card);padding:22px;border-radius:8px;border-left:4px solid var(--g)}
-footer{text-align:center;padding:40px 5vw;border-top:1px solid var(--g2);font-size:.8rem;opacity:.7}footer a{color:var(--g)}
-#pop{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:50;padding:20px}
-#pop .box{background:var(--card);border:2px solid var(--g);border-radius:10px;max-width:440px;width:100%;padding:26px;text-align:center;position:relative}#pop img{max-width:100%;border-radius:6px;margin-bottom:12px}
+.card h3{font-size:1.15rem;display:flex;justify-content:space-between;gap:10px;line-height:1.2}.card h3 span{color:var(--y);white-space:nowrap}
+.card p{font-size:.85rem;opacity:.8}.tag{align-self:flex-start;background:var(--g);color:#031003;font:700 .7rem Oswald;padding:2px 8px;border-radius:3px;text-transform:uppercase}.al{font-size:.72rem;opacity:.55}
+.order{text-align:center;background:linear-gradient(135deg,#0f3d12cc,#07140acc);border:2px solid var(--y);border-radius:12px;padding:50px 20px;box-shadow:0 0 50px #f2c94c22}
+.about{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}@media(max-width:700px){.about{grid-template-columns:1fr}}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.info div{background:var(--card);padding:22px;border-radius:8px;border-left:4px solid var(--y)}
+footer{text-align:center;padding:40px 5vw 90px;border-top:2px solid var(--y);font-size:.8rem;opacity:.8;background:#060a05cc}footer a{color:var(--g)}
+.fab{position:fixed;bottom:16px;right:16px;z-index:30;box-shadow:0 0 25px #f2c94c88}
+#pop{position:fixed;inset:0;background:#000c;display:none;place-items:center;z-index:50;padding:20px}
+#pop .box{background:var(--card);border:3px solid var(--y);border-radius:10px;max-width:440px;width:100%;padding:26px;text-align:center;position:relative;box-shadow:0 0 60px #f2c94c44}#pop img{max-width:100%;border-radius:6px;margin-bottom:12px}
 #pop .x{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--t);font-size:1.8rem;cursor:pointer}
-.mini{position:fixed;bottom:14px;right:14px;z-index:15;display:none}
-dialog{display:none}
-.bb{font:700 clamp(2.8rem,10vw,6rem)/1 Helvetica,Arial,sans-serif;text-transform:none;letter-spacing:-.02em;display:flex;flex-direction:column;align-items:center;gap:10px;color:#fff}
-.bb .el{display:inline-block;position:relative;background:#1e7a2c;border:.05em solid #fff;padding:0 .14em .2em;margin-right:.03em;box-shadow:0 0 22px #7cf03a66}
-.bb .el i,.bb .el small{position:absolute;bottom:.03em;font:normal 700 .17em Arial,sans-serif}.bb .el i{left:.2em}.bb .el small{right:.2em}
-.bb.sm{flex-direction:row;font-size:1.5rem;gap:.35em}.bb.sm .el{border-width:2px;box-shadow:none}
-.hero h1.bb span{color:#fff;text-shadow:none}
+@media(prefers-reduced-motion:reduce){#bg{display:none}*{animation:none!important}}
 </style></head><body>
-<div id="banner"></div>
-<header><div class="bb sm"><span><span class="el"><i>Barkim</i><small>35</small>Br</span>eaking</span><span><span class="el"><i>Rice</i><small>15</small>Ri</span>ce</span></div>
-<nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">À propos</a><a href="#infos">Infos</a></nav></header>
-<div class="hero"><span class="float" style="top:8%;left:4%">Br</span><span class="float" style="bottom:8%;right:5%">Ri</span><span class="float" style="top:20%;right:12%;font-size:4rem">C₂₇H₂₁</span>
-<div><h1 class="bb"><span><span class="el"><i>Barkim</i><small>35</small>Br</span>eaking</span><span><span class="el"><i>Rice</i><small>15</small>Ri</span>ce</span></h1><p>Poulet crousty pur à 99,1 %. Riz, sauces maison, aucune impureté. Mérignac.</p>
-<a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander sur Uber Eats</a> <a class="btn o" href="#menu">Voir le menu</a></div></div>
-<section id="menu"><h2>Le <em>Menu</em></h2><p class="sub">Formules, sauces, boissons et desserts — tout est là.</p><div id="tabs"></div><div class="grid" id="grid"></div></section>
-<section id="commander"><div class="order"><h2>Prêt à <em>cuisiner</em> ?</h2><p class="sub">Commandez en livraison ou à emporter via Uber Eats.</p><a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander maintenant</a></div></section>
-<section id="apropos"><h2>À <em>propos</em></h2><p id="about" style="max-width:720px"></p></section>
+<canvas id="bg"></canvas><div id="banner"></div>
+<header><div id="hl"></div><nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Infos</a></nav></header>
+<main>
+<div class="hero"><div class="mol" id="m1" style="left:2%;top:10%"></div><div class="mol" id="m2" style="right:1%;bottom:6%"></div>
+<div><div id="hh"></div><div class="sub1">Poulet Crousty · Mérignac</div>
+<p class="t">« Say my name. » — <b>Breaking Rice</b>.<br>Riz thaï, poulet crousty, sauces maison. Pureté : <b>99,1 %</b>.</p>
+<a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander sur Uber Eats</a><a class="btn o" href="#menu">Voir le menu</a></div></div>
+<div class="tape"></div>
+<section id="menu"><h2>Le <em>Menu</em></h2><p class="sub">Menus, riz crousty, burgers, extras, desserts et boissons.</p><div id="tabs"></div><div class="grid" id="grid"></div></section>
+<div class="tape"></div>
+<section id="commander"><div class="order"><h2>Prêt à <em>cuisiner</em> ?</h2><p class="sub">Livraison ou à emporter via Uber Eats. Aucune trace, juste du crousty.</p><a class="btn" href="#" data-uber target="_blank" rel="noopener">Commander maintenant</a></div></section>
+<section id="apropos"><div class="about"><div><h2>La <em>formule</em></h2><p id="about" style="max-width:640px"></p></div><div id="m3"></div></div></section>
 <section id="infos"><h2>Infos <em>pratiques</em></h2><div class="info"><div><h3>Adresse</h3><p id="addr"></p></div><div><h3>Horaires</h3><p id="hrs"></p></div><div><h3>Contact</h3><p id="tel"></p></div></div></section>
-<footer>© <span id="yr"></span> Breaking Rice — Site non affilié à AMC/Sony. Allergènes : demandez-nous la liste complète. <br>L'abus de poulet crousty est bon pour le moral. · <a href="/admin">Admin</a></footer>
+</main>
+<footer><div id="hf" style="margin-bottom:14px"></div>© <span id="yr"></span> Breaking Rice — Site non affilié à AMC/Sony. Allergènes : demandez-nous la liste complète. · <a href="/admin">Admin</a></footer>
+<a class="btn fab" href="#" data-uber target="_blank" rel="noopener">Commander</a>
 <div id="pop"><div class="box"><button class="x" onclick="pop.style.display='none'">×</button><div id="pc"></div></div></div>
 <script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-$('#yr').textContent=new Date().getFullYear();
+const bb=(t,c='')=>`<${t} class="bb ${c}"><span><span class="el"><i>Barkim</i><small>35</small>Br</span>eaking</span><span><span class="el"><i>Rice</i><small>15</small>Ri</span>ce</span></${t}>`;
+$('#hl').innerHTML=bb('div','sm');$('#hh').innerHTML=bb('h1');$('#hf').innerHTML=bb('div','sm');$('#yr').textContent=new Date().getFullYear();
+const mol=()=>{const r=34,w=r*1.732,hx=(x,y)=>[0,1,2,3,4,5].map(i=>{const a=Math.PI/180*(60*i-30);return(x+r*Math.cos(a)).toFixed(1)+','+(y+r*Math.sin(a)).toFixed(1)}).join(' ');
+ const H=[[70,60,'Riz'],[70+w,60,'Poulet'],[70+w/2,60+1.5*r,'Oignons'],[70+w*1.5,60+1.5*r,'Sauce'],[70+w,60+3*r,'Thaï'],[70+w*2,60+3*r,'Fromage']];
+ return`<svg viewBox="0 0 290 240" width="100%" style="max-width:300px">${H.map(([x,y,l])=>`<polygon points="${hx(x,y)}"/><text x="${x}" y="${y+4}">${l}</text>`).join('')}<path d="M${70+w*2+r*.87} ${60+3*r} l30 -18 M${70-w/2} ${60-r*.5} l-20 -14"/><text x="${70+w*2+60}" y="${60+3*r-14}">NH₂</text><text x="22" y="30">C₁₀H₁₅N</text></svg>`};
+$('#m1').innerHTML=mol();$('#m2').innerHTML=mol();$('#m3').innerHTML=mol();document.querySelectorAll('.mol').forEach(m=>m.style.width='min(300px,30vw)');$('#m3').style.opacity=.8;
+const cv=$('#bg'),cx=cv.getContext('2d');let W,H,P=[],L=[];const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
+const TXT=['Br','Ri','C₁₀H₁₅N','H₂O','NaCl','Ba','Cl₂','C₆H₁₂O₆','35','15','CH₃','NH₂','⌬','O₂','Na','C₈H₁₀N₄O₂','Se','Ni','99,1%','Cu'];
+const mk=(x,y)=>({x:x??Math.random()*W,y:y??H+40,t:TXT[Math.random()*TXT.length|0],s:16+Math.random()*38,v:.15+Math.random()*.5,r:Math.random()*6.28,w:(Math.random()-.5)*.012,a:.06+Math.random()*.14,c:Math.random()<.65?'124,240,58':'242,201,76'});
+for(let i=0;i<40;i++){const l=mk();l.y=Math.random()*H;L.push(l)}
+const smoke=(x,y,n=1,c)=>{for(let i=0;i<n&&P.length<170;i++)P.push({x,y,vx:(Math.random()-.5)*.9,vy:-.4-Math.random()*.8,r:18+Math.random()*28,a:.17,g:.35+Math.random()*.4,c:c||(Math.random()<.8?'124,240,58':'242,201,76')})};
+(function tick(){cx.clearRect(0,0,W,H);if(Math.random()<.3)smoke(Math.random()*W,H+20);
+ for(const l of L){l.y-=l.v;l.r+=l.w;l.x+=Math.sin(l.y/60)*.2;if(l.y<-60)Object.assign(l,mk());cx.save();cx.translate(l.x,l.y);cx.rotate(l.r);cx.font=`700 ${l.s}px Oswald,sans-serif`;cx.fillStyle=`rgba(${l.c},${l.a})`;cx.fillText(l.t,0,0);cx.restore()}
+ for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx+Math.sin(p.y/40)*.3;p.y+=p.vy;p.r+=p.g;p.a-=.0007;if(p.a<=0){P.splice(i,1);continue}
+  const g=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);g.addColorStop(0,`rgba(${p.c},${p.a})`);g.addColorStop(1,`rgba(${p.c},0)`);cx.fillStyle=g;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.3);cx.fill()}
+ requestAnimationFrame(tick)})();
+let lt=0;addEventListener('pointermove',e=>{if(Date.now()-lt<90)return;lt=Date.now();const t=e.target.closest('.btn,button,.card,.nav a');if(t)smoke(e.clientX,e.clientY,1,t.matches('.card')?'124,240,58':'242,201,76')});
+addEventListener('click',e=>{smoke(e.clientX,e.clientY,6);for(let i=0;i<3&&L.length<70;i++){const l=mk(e.clientX+(Math.random()-.5)*60,e.clientY);l.a=.35;L.push(l)}});
+addEventListener('keydown',e=>{if(e.key.length===1&&L.length<70){const l=mk();l.t=e.key.toUpperCase();l.a=.4;l.s=40;L.push(l)}});
 fetch('/api/menu').then(r=>r.json()).then(({items,settings:s})=>{
  document.querySelectorAll('[data-uber]').forEach(a=>a.href=s.uberUrl);
  $('#about').textContent=s.about;$('#addr').textContent=s.address;$('#hrs').textContent=s.hours;$('#tel').textContent=s.phone||'Via Uber Eats';
  if(s.banner?.enabled&&s.banner.text){$('#banner').style.display='block';$('#banner').textContent=s.banner.text}
  const cats=s.categories.filter(c=>items.some(i=>i.category===c));let cur=cats[0];
  const draw=()=>{$('#tabs').innerHTML=cats.map(c=>`<button class="${c===cur?'on':''}" data-c="${E(c)}">${E(c)}</button>`).join('');
-  $('#grid').innerHTML=items.filter(i=>i.category===cur).map(i=>`<div class="card">${i.photo?`<img loading="lazy" src="${E(i.photo)}" alt="${E(i.name)}">`:''}<div class="b">${i.tag?`<span class="tag">${E(i.tag)}</span>`:''}<h3>${E(i.name)}<span>${(+i.price).toFixed(2).replace('.',',')} €</span></h3><p>${E(i.description)}</p>${i.allergens?`<div class="al">Allergènes : ${E(i.allergens)}</div>`:''}</div></div>`).join('')};
+  $('#grid').innerHTML=items.filter(i=>i.category===cur).map((i,k)=>`<div class="card" style="animation-delay:${k*50}ms">${i.photo?`<img loading="lazy" src="${E(i.photo)}" alt="${E(i.name)}">`:''}<div class="b">${i.tag?`<span class="tag">${E(i.tag)}</span>`:''}<h3>${E(i.name)}<span>${(+i.price).toFixed(2).replace('.',',')} €</span></h3><p>${E(i.description)}</p>${i.allergens?`<div class="al">Allergènes : ${E(i.allergens)}</div>`:''}</div></div>`).join('')};
  $('#tabs').onclick=e=>{if(e.target.dataset.c){cur=e.target.dataset.c;draw()}};draw();
  const p=s.popup;if(p?.enabled&&(p.title||p.text)){const k='p'+(p.title+p.text).length;if(!sessionStorage[k]){sessionStorage[k]=1;
-  $('#pc').innerHTML=`${p.image?`<img src="${E(p.image)}">`:''}<h2>${E(p.title)}</h2><p>${E(p.text)}</p><br><a class="btn" href="${E(s.uberUrl)}" target="_blank" rel="noopener">Commander</a>`;setTimeout(()=>pop.style.display='grid',800)}}
+  $('#pc').innerHTML=`${p.image?`<img src="${E(p.image)}">`:''}<h2>${E(p.title)}</h2><p>${E(p.text)}</p><br><a class="btn" href="${E(s.uberUrl)}" target="_blank" rel="noopener">Commander</a>`;setTimeout(()=>$('#pop').style.display='grid',800)}}
 });
 </script></body></html>
