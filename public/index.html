@@ -48,7 +48,13 @@ h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:6px}h2 em{color:var(--g);font-
 #hrs{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}#hrs td{padding:4px 0;border-bottom:1px dashed #1f5a1799}#hrs td:last-child{text-align:right}#hrs .td{color:var(--g);font-weight:bold}
 .st{float:right;font:700 .75rem Oswald;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}.st.on{background:var(--g);color:#031003;box-shadow:0 0 12px #7cf03a}.st.off{background:#7a1f1f;color:#fff}
 .mapw{position:relative;border:4px solid var(--y);border-radius:10px;overflow:hidden;box-shadow:0 0 0 4px #111,0 0 40px #f2c94c33;min-height:440px}
-#map{height:100%;min-height:440px;background:#0a1209}#map iframe{display:block;width:100%;height:440px;border:0;filter:grayscale(1) invert(.92) sepia(1) hue-rotate(55deg) saturate(2.6) brightness(.95) contrast(1.1)}.mapw .leaflet-tile-pane{filter:grayscale(1) sepia(1) hue-rotate(52deg) saturate(3.2) brightness(1.05) contrast(1.15)}
+#map{position:absolute;inset:0;background:#0a1209}#map iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) sepia(1) hue-rotate(55deg) saturate(2.6) brightness(.95) contrast(1.1)}
+.mapw.sat #map iframe{filter:sepia(.7) hue-rotate(50deg) saturate(1.8) contrast(1.1) brightness(.85)}
+.mapw{min-height:460px}
+.radar{position:absolute;left:50%;top:50%;z-index:502;pointer-events:none;width:0;height:0}.radar i{position:absolute;left:-60px;top:-60px;width:120px;height:120px;border:2px solid var(--y);border-radius:50%;opacity:0;animation:rd 3s infinite}.radar i:nth-child(2){animation-delay:1s}.radar i:nth-child(3){animation-delay:2s}@keyframes rd{0%{transform:scale(.1);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+.scan{position:absolute;left:0;right:0;height:90px;z-index:503;pointer-events:none;background:linear-gradient(180deg,transparent,#7cf03a2e,transparent);animation:sc 6s linear infinite}@keyframes sc{from{top:-90px}to{top:100%}}
+.mcard{position:absolute;left:14px;top:14px;z-index:510;background:#060a05ee;border:1px solid var(--y);border-left:5px solid var(--y);padding:10px 14px;max-width:230px;font-size:.78rem;line-height:1.35}.mcard b{font:700 1.05rem Oswald;text-transform:uppercase;letter-spacing:.06em;color:var(--y)}
+.mtog{position:absolute;top:14px;right:14px;z-index:510;display:flex;gap:6px}.mtog button{background:#060a05ee;color:var(--y);border:1px solid var(--y);font:600 .75rem Oswald;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;cursor:pointer}.mtog button.on{background:var(--y);color:#111}.mapw .leaflet-tile-pane{filter:grayscale(1) sepia(1) hue-rotate(52deg) saturate(3.2) brightness(1.05) contrast(1.15)}
 .chain{position:absolute;inset:0;pointer-events:none;z-index:500;background:repeating-linear-gradient(45deg,transparent 0 11px,#ffffff14 11px 12px),repeating-linear-gradient(-45deg,transparent 0 11px,#ffffff14 11px 12px);box-shadow:inset 0 0 70px #000}
 .lab{position:absolute;left:0;bottom:0;z-index:501;background:var(--y);color:#111;font:700 .8rem Oswald;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px}
 .pn{width:44px;height:44px;border-radius:50%;background:var(--y);color:#111;display:grid;place-items:center;font-size:26px;border:3px solid #111;box-shadow:0 0 0 3px var(--y),0 0 30px #f2c94c;animation:pl 2s infinite}@keyframes pl{50%{box-shadow:0 0 0 8px #f2c94c55,0 0 45px #f2c94c}}
@@ -80,7 +86,10 @@ footer h4{font:700 1rem Oswald;letter-spacing:.1em;text-transform:uppercase;colo
 <div class="ic"><b>☣ Adresse</b><p id="addr"></p><a class="btn sm" id="itin" target="_blank" rel="noopener">Itinéraire</a></div>
 <div class="ic"><b>Horaires</b><span id="open" class="st"></span><table id="hrs"></table></div>
 <div class="ic"><b>Contact</b><p id="tel" style="margin:0"></p></div></div>
-<div class="mapw"><div id="map"></div><div class="chain"></div><div class="lab">☣ Zone de production · accès autorisé</div></div></div></section>
+<div class="mapw" id="mapw"><div id="map"></div><div class="chain"></div><div class="scan"></div><div class="radar"><i></i><i></i><i></i></div>
+<div class="mcard"><b>Breaking Rice</b><br><span id="mc"></span></div>
+<div class="mtog"><button class="on" data-t="m">Plan</button><button data-t="h">Satellite</button></div>
+<div class="lab">☣ Zone de production · accès autorisé</div></div></div></section>
 </main>
 <div class="tape"></div>
 <footer><div class="fg"><div><div id="hf"></div><p class="fs">Riz thaï, poulet crousty, sauces maison.<br>Pureté : 99,1 %.<br><span id="fa"></span></p></div>
@@ -121,8 +130,9 @@ function bottom(s){const sc=s.schedule||[],n=new Date(),d=(n.getDay()+6)%7,m=n.g
  $('#open').textContent=o?'Ouvert maintenant':'Fermé';$('#open').className='st '+(o?'on':'off');
  const PG=s.pages||[];$('#fp').innerHTML=PG.filter(x=>x.show).map(x=>`<a href="#" data-p="${E(x.slug)}">${E(x.title)}</a>`).join('');
  $('#fp').onclick=e=>{const a=e.target.closest('[data-p]');if(!a)return;e.preventDefault();const p=PG.find(x=>x.slug===a.dataset.p);$('#pc').innerHTML=`<h2>${E(p.title)}</h2><p style="text-align:left;white-space:pre-wrap;font-size:.9rem">${E(p.text)}</p>`;$('#pop').style.display='grid'};
- const q=s.lat&&s.lng?s.lat+','+s.lng:s.address;
- $('#map').innerHTML=`<iframe title="Carte Breaking Rice" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=16&hl=fr&output=embed"></iframe>`}
+ const q=encodeURIComponent(s.lat&&s.lng?s.lat+','+s.lng:s.address);$('#mc').textContent=s.address;
+ const setMap=t=>{$('#map').innerHTML=`<iframe title="Carte Breaking Rice" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=17&hl=fr&t=${t}&output=embed"></iframe>`;$('#mapw').classList.toggle('sat',t==='h');document.querySelectorAll('.mtog button').forEach(b=>b.classList.toggle('on',b.dataset.t===t))};
+ setMap('m');document.querySelector('.mtog').onclick=e=>{if(e.target.dataset.t)setMap(e.target.dataset.t)}}
 fetch('/api/menu').then(r=>r.json()).then(({items,settings:s})=>{
  document.querySelectorAll('[data-uber]').forEach(a=>a.href=s.uberUrl);
  $('#about').textContent=s.about;bottom(s);
