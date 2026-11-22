@@ -103,7 +103,7 @@ function reviews(g){g=g||{};const u=g.url||'https://maps.app.goo.gl/pcJ7JVmTiLGJ
  $('#ga').href=u;$('#gw').href=g.placeId?'https://search.google.com/local/writereview?placeid='+encodeURIComponent(g.placeId):u;
  $('#gx').textContent=g.rating>=4.5?'Excellent':g.rating>=4?'Très bien':'';$('#gstars').innerHTML=g.rating?st(g.rating)+'<i title="Avis Google">✔</i>':'';
  $('#gs').innerHTML=g.rating?`<b>${(+g.rating).toFixed(1).replace('.',',')}</b> / 5${g.count?' · '+(+g.count)+' avis':''}`:'';$('#gv').textContent=g.live?'✔ Avis vérifiés Google':'Avis publiés sur Google';
- $('#rvl').innerHTML=L.map(r=>`<div class="rc rv"><div class="rh"><span class="av">${E((r.name||'?')[0].toUpperCase())}</span><b>${E(r.name)}</b><span class="gg">G</span></div><div class="stars">${st(r.rating)}<i title="Avis Google">✔</i></div><p>${E(r.text)}</p>${r.date?'<small>'+E(r.date)+'</small>':''}</div>`).join('')}
+ $('#rvl').innerHTML='<div style="animation-duration:'+Math.max(30,L.length*9)+'s">'+[...L,...L].map(r=>`<div class="rc"><div class="rh"><span class="av">${E((r.name||'?')[0].toUpperCase())}</span><b>${E(r.name)}</b><span class="gg">G</span></div><div class="stars">${st(r.rating)}<i title="Avis Google">✔</i></div><p>${E(r.text)}</p>${r.date?'<small>'+E(r.date)+'</small>':''}</div>`).join('')+'</div>'}
 function extras(s){
  const f=(s.faq||[]).filter(x=>x.q);reviews(s.google);$('#faqs').innerHTML=f.map(x=>`<details class="rv"><summary>${E(x.q)}</summary><p>${E(x.a)}</p></details>`).join('');if(!f.length)$('#faq').style.display='none';
  const so=s.socials||{},nm={instagram:'Instagram',tiktok:'TikTok',snapchat:'Snapchat',facebook:'Facebook'};

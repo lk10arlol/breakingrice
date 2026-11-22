@@ -138,3 +138,7 @@ section{position:relative}
 .gg{width:26px;height:26px;display:grid;place-items:center;background:linear-gradient(160deg,#2fae3f,#0f4d1a);border:2px solid #fff;border-radius:3px;font:700 .85rem Helvetica,Arial,sans-serif}
 .rc p{font-size:.85rem;opacity:.9;display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden}.rc small{opacity:.55}
 #ga{display:inline-block;margin-top:18px;color:var(--g)}
+
+.rvw{display:block;overflow:hidden;padding:10px 0}.rvw>div{display:flex;width:max-content;animation:mq 70s linear infinite}.rvw:hover>div,.rvw:active>div{animation-play-state:paused}
+.rc{width:300px;flex:none;margin-right:16px}@media(max-width:760px){.rc{width:260px}}
+@media(prefers-reduced-motion:reduce){.rvw{overflow-x:auto}}

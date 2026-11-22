@@ -38,7 +38,6 @@ app.get('/sitemap.xml',(q,r)=>r.type('application/xml').send('<?xml version="1.0
 app.use((q,r,n)=>{r.set({'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin'});n()});
 app.use(express.static('public',{maxAge:'7d',setHeaders:(r,p)=>{if(/\.(html|json|xml|txt|css)$/.test(p))r.setHeader('Cache-Control','no-cache')}}));
 const AP='/admin';
-app.get(AP+'/',(q,r)=>r.redirect(AP));
 app.get(AP,(q,r)=>{r.set('X-Robots-Tag','noindex');r.sendFile(__dirname+'/private/gestion.html')});
 app.use((q,r)=>r.status(404).sendFile(__dirname+'/public/404.html'));
 mongoose.connect(MONGODB_URI).then(async()=>{
