@@ -48,7 +48,7 @@ h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:6px}h2 em{color:var(--g);font-
 #hrs{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}#hrs td{padding:4px 0;border-bottom:1px dashed #1f5a1799}#hrs td:last-child{text-align:right}#hrs .td{color:var(--g);font-weight:bold}
 .st{float:right;font:700 .75rem Oswald;padding:2px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}.st.on{background:var(--g);color:#031003;box-shadow:0 0 12px #7cf03a}.st.off{background:#7a1f1f;color:#fff}
 .mapw{position:relative;border:4px solid var(--y);border-radius:10px;overflow:hidden;box-shadow:0 0 0 4px #111,0 0 40px #f2c94c33;min-height:440px}
-#map{height:100%;min-height:440px;background:#0a1209}.mapw .leaflet-tile-pane{filter:grayscale(1) sepia(1) hue-rotate(52deg) saturate(3.2) brightness(1.05) contrast(1.15)}
+#map{height:100%;min-height:440px;background:#0a1209}#map iframe{display:block;width:100%;height:440px;border:0;filter:grayscale(1) invert(.92) sepia(1) hue-rotate(55deg) saturate(2.6) brightness(.95) contrast(1.1)}.mapw .leaflet-tile-pane{filter:grayscale(1) sepia(1) hue-rotate(52deg) saturate(3.2) brightness(1.05) contrast(1.15)}
 .chain{position:absolute;inset:0;pointer-events:none;z-index:500;background:repeating-linear-gradient(45deg,transparent 0 11px,#ffffff14 11px 12px),repeating-linear-gradient(-45deg,transparent 0 11px,#ffffff14 11px 12px);box-shadow:inset 0 0 70px #000}
 .lab{position:absolute;left:0;bottom:0;z-index:501;background:var(--y);color:#111;font:700 .8rem Oswald;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px}
 .pn{width:44px;height:44px;border-radius:50%;background:var(--y);color:#111;display:grid;place-items:center;font-size:26px;border:3px solid #111;box-shadow:0 0 0 3px var(--y),0 0 30px #f2c94c;animation:pl 2s infinite}@keyframes pl{50%{box-shadow:0 0 0 8px #f2c94c55,0 0 45px #f2c94c}}
@@ -121,11 +121,8 @@ function bottom(s){const sc=s.schedule||[],n=new Date(),d=(n.getDay()+6)%7,m=n.g
  $('#open').textContent=o?'Ouvert maintenant':'Fermé';$('#open').className='st '+(o?'on':'off');
  const PG=s.pages||[];$('#fp').innerHTML=PG.filter(x=>x.show).map(x=>`<a href="#" data-p="${E(x.slug)}">${E(x.title)}</a>`).join('');
  $('#fp').onclick=e=>{const a=e.target.closest('[data-p]');if(!a)return;e.preventDefault();const p=PG.find(x=>x.slug===a.dataset.p);$('#pc').innerHTML=`<h2>${E(p.title)}</h2><p style="text-align:left;white-space:pre-wrap;font-size:.9rem">${E(p.text)}</p>`;$('#pop').style.display='grid'};
- const go=()=>{const ll=[s.lat||44.8386,s.lng||-0.6436],mp=L.map('map',{scrollWheelZoom:false}).setView(ll,s.lat?16:13);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',maxZoom:19}).addTo(mp);
-  L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="pn">☣</div>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(mp).bindPopup('<b>Breaking Rice</b><br>'+E(s.address)).openPopup()};
- const c=document.createElement('link');c.rel='stylesheet';c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.append(c);
- const j=document.createElement('script');j.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';j.onload=go;document.head.append(j)}
+ const q=s.lat&&s.lng?s.lat+','+s.lng:s.address;
+ $('#map').innerHTML=`<iframe title="Carte Breaking Rice" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=16&hl=fr&output=embed"></iframe>`}
 fetch('/api/menu').then(r=>r.json()).then(({items,settings:s})=>{
  document.querySelectorAll('[data-uber]').forEach(a=>a.href=s.uberUrl);
  $('#about').textContent=s.about;bottom(s);
