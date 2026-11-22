@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#060a05">
 <title>Breaking Rice — Poulet Crousty à Mérignac</title>
 <meta name="description" content="Breaking Rice : riz crousty, burgers et poulet pané à Mérignac. Pur à 99,1 %. Commandez sur Uber Eats.">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
@@ -67,9 +67,25 @@ footer h4{font:700 1rem Oswald;letter-spacing:.1em;text-transform:uppercase;colo
 #pop .box{background:var(--card);border:3px solid var(--y);border-radius:10px;max-width:440px;max-height:85vh;overflow:auto;width:100%;padding:26px;text-align:center;position:relative;box-shadow:0 0 60px #f2c94c44}#pop img{max-width:100%;border-radius:6px;margin-bottom:12px}
 #pop .x{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--t);font-size:1.8rem;cursor:pointer}
 @media(prefers-reduced-motion:reduce){#bg{display:none}*{animation:none!important}}
+html{-webkit-text-size-adjust:100%}*{-webkit-tap-highlight-color:transparent}
+.burger{display:none;background:none;border:2px solid var(--y);color:var(--y);font-size:1.5rem;line-height:1;padding:4px 12px;border-radius:4px;cursor:pointer}
+@media(max-width:760px){
+ header{padding:8px 4vw}.burger{display:block}
+ .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:#060a05fa;border-bottom:2px solid var(--y);padding:8px 4vw}.nav.open{display:flex}.nav a{padding:14px 4px;font-size:1.1rem;border-bottom:1px dashed var(--g2)}
+ section{padding:50px 4vw}.hero{min-height:auto;padding:50px 4vw 60px}.hero p.t{font-size:1rem}
+ .hero .btn{display:block;max-width:340px;margin:10px auto}.mol{opacity:.25}
+ #tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -4vw 22px;padding:0 4vw 8px;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}#tabs button{white-space:nowrap;flex:none}
+ .grid{grid-template-columns:repeat(2,1fr);gap:12px}.card .b{padding:10px;gap:4px}.card h3{font-size:.95rem;flex-direction:column;gap:2px}.card p{font-size:.75rem}
+ .order{padding:36px 16px}.about{gap:16px}
+ #hrs{font-size:.78rem}.ic{padding:14px}.mapw{min-height:380px}.mcard{display:none}.lab{font-size:.68rem;padding:5px 10px}.mtog button{padding:5px 9px}
+ .fab{left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));text-align:center;margin:0}
+ footer{padding:40px 4vw calc(90px + env(safe-area-inset-bottom))}#hf .bb.sm{font-size:1.6rem}#pop .box{padding:20px}
+}
+@media(max-width:400px){.bb.sm{font-size:1.1rem}.grid{gap:10px}.card h3{font-size:.88rem}}
+@media(max-width:340px){.grid{grid-template-columns:1fr}}
 </style></head><body>
 <canvas id="bg"></canvas><div id="banner"></div>
-<header><div id="hl"></div><nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Nous trouver</a></nav></header>
+<header><div id="hl"></div><button class="burger" id="bur" aria-label="Menu">☰</button><nav class="nav"><a href="#menu">Menu</a><a href="#commander">Commander</a><a href="#apropos">La formule</a><a href="#infos">Nous trouver</a></nav></header>
 <main>
 <div class="hero"><div class="mol" id="m1" style="left:2%;top:10%"></div><div class="mol" id="m2" style="right:1%;bottom:6%"></div>
 <div><div id="hh"></div><div class="sub1">Poulet Crousty · Mérignac</div>
@@ -109,9 +125,9 @@ $('#m1').innerHTML=mol();$('#m2').innerHTML=mol();$('#m3').innerHTML=mol();docum
 const cv=$('#bg'),cx=cv.getContext('2d');let W,H,P=[],L=[];const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
 const TXT=['Br','Ri','C₁₀H₁₅N','H₂O','NaCl','Ba','Cl₂','C₆H₁₂O₆','35','15','CH₃','NH₂','⌬','O₂','Na','C₈H₁₀N₄O₂','Se','Ni','99,1%','Cu'];
 const mk=(x,y)=>({x:x??Math.random()*W,y:y??H+40,t:TXT[Math.random()*TXT.length|0],s:16+Math.random()*38,v:.15+Math.random()*.5,r:Math.random()*6.28,w:(Math.random()-.5)*.012,a:.06+Math.random()*.14,c:Math.random()<.65?'124,240,58':'242,201,76'});
-for(let i=0;i<40;i++){const l=mk();l.y=Math.random()*H;L.push(l)}
-const smoke=(x,y,n=1,c)=>{for(let i=0;i<n&&P.length<170;i++)P.push({x,y,vx:(Math.random()-.5)*.9,vy:-.4-Math.random()*.8,r:18+Math.random()*28,a:.17,g:.35+Math.random()*.4,c:c||(Math.random()<.8?'124,240,58':'242,201,76')})};
-(function tick(){cx.clearRect(0,0,W,H);if(Math.random()<.3)smoke(Math.random()*W,H+20);
+const SM=innerWidth<700;for(let i=0;i<(SM?16:40);i++){const l=mk();l.y=Math.random()*H;L.push(l)}
+const smoke=(x,y,n=1,c)=>{for(let i=0;i<n&&P.length<(SM?70:170);i++)P.push({x,y,vx:(Math.random()-.5)*.9,vy:-.4-Math.random()*.8,r:18+Math.random()*28,a:.17,g:.35+Math.random()*.4,c:c||(Math.random()<.8?'124,240,58':'242,201,76')})};
+(function tick(){cx.clearRect(0,0,W,H);if(Math.random()<(SM?.12:.3))smoke(Math.random()*W,H+20);
  for(const l of L){l.y-=l.v;l.r+=l.w;l.x+=Math.sin(l.y/60)*.2;if(l.y<-60)Object.assign(l,mk());cx.save();cx.translate(l.x,l.y);cx.rotate(l.r);cx.font=`700 ${l.s}px Oswald,sans-serif`;cx.fillStyle=`rgba(${l.c},${l.a})`;cx.fillText(l.t,0,0);cx.restore()}
  for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx+Math.sin(p.y/40)*.3;p.y+=p.vy;p.r+=p.g;p.a-=.0007;if(p.a<=0){P.splice(i,1);continue}
   const g=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);g.addColorStop(0,`rgba(${p.c},${p.a})`);g.addColorStop(1,`rgba(${p.c},0)`);cx.fillStyle=g;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.3);cx.fill()}
@@ -121,6 +137,7 @@ addEventListener('click',e=>{smoke(e.clientX,e.clientY,6);for(let i=0;i<3&&L.len
 addEventListener('keydown',e=>{if(e.key.length===1&&L.length<70){const l=mk();l.t=e.key.toUpperCase();l.a=.4;l.s=40;L.push(l)}});
 const DJ=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 const rg=t=>String(t||'').split('/').map(x=>x.trim().match(/(\d{1,2})[:hH](\d{2})\s*-\s*(\d{1,2})[:hH](\d{2})/)).filter(Boolean).map(m=>[+m[1]*60+ +m[2],+m[3]*60+ +m[4]]);
+$('#bur').onclick=()=>$('.nav').classList.toggle('open');document.querySelectorAll('.nav a').forEach(a=>a.onclick=()=>$('.nav').classList.remove('open'));
 $('#pop').onclick=e=>{if(e.target.id==='pop')e.target.style.display='none'};
 function bottom(s){const sc=s.schedule||[],n=new Date(),d=(n.getDay()+6)%7,m=n.getHours()*60+n.getMinutes();
  $('#addr').textContent=s.address;$('#fa').textContent=s.address;$('#tel').innerHTML=s.phone?`<a href="tel:${E(s.phone)}">${E(s.phone)}</a>`:'Commande via Uber Eats';
