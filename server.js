@@ -4,7 +4,7 @@ const {MONGODB_URI,ADMIN_PASSWORD}=process.env;
 if(!MONGODB_URI||!ADMIN_PASSWORD){console.error('MONGODB_URI et ADMIN_PASSWORD requis');process.exit(1)}
 const Item=mongoose.model('Item',new mongoose.Schema({name:String,category:String,description:String,price:Number,photo:String,allergens:String,tag:String,available:{type:Boolean,default:true},order:{type:Number,default:0}}));
 const SC='11:30-15:00 / 18:00-01:00';
-const DEF={categories:['Menus','Riz Crousty Original','Riz Crousty Gratiné','Burgers','Extras','Desserts','Boissons'],uberUrl:'https://www.ubereats.com/fr/store/breaking-rice-poulet-crousty-merignac/i6V0LUxyV96WUOl3v3YT_g',about:'Chez Breaking Rice, on cuisine le poulet crousty avec une pureté de 99,1 %. Riz parfumé, poulet croustillant, sauces maison : une formule qui ne laisse aucune trace… sauf dans votre mémoire.',address:'32 Avenue John Fitzgerald Kennedy, 33700 Mérignac',phone:'',schedule:[SC,SC,SC,SC,SC,SC,'18:00-23:30'],lat:null,lng:null,pages:[{title:'Mentions légales',slug:'mentions-legales',show:true,text:'Breaking Rice — 32 Avenue John Fitzgerald Kennedy, 33700 Mérignac.\nÉditeur, SIRET, contact : à compléter dans l\'administration.\nHébergeur : Render Services, Inc.'},{title:'Allergènes',slug:'allergenes',show:true,text:'Nos produits peuvent contenir des allergènes (gluten, lait, œuf, soja, moutarde, sésame…). Demandez la liste détaillée à l\'équipe avant de commander.'}],popup:{enabled:false,title:'',text:'',image:''},banner:{enabled:false,text:''}};
+const DEF={categories:['Offres du labo','Menus','Riz Crousty Original','Riz Crousty Gratiné','Burgers','Extras','Desserts','Boissons'],uberUrl:'https://www.ubereats.com/fr/store/breaking-rice-poulet-crousty-merignac/i6V0LUxyV96WUOl3v3YT_g',about:'Chez Breaking Rice, on cuisine le poulet crousty avec une pureté de 99,1 %. Riz parfumé, poulet croustillant, sauces maison : une formule qui ne laisse aucune trace… sauf dans votre mémoire.',address:'32 Avenue John Fitzgerald Kennedy, 33700 Mérignac',phone:'',schedule:[SC,SC,SC,SC,SC,SC,'18:00-23:30'],lat:null,lng:null,pages:[{title:'Mentions légales',slug:'mentions-legales',show:true,text:'Breaking Rice — 32 Avenue John Fitzgerald Kennedy, 33700 Mérignac.\nÉditeur, SIRET, contact : à compléter dans l\'administration.\nHébergeur : Render Services, Inc.'},{title:'Allergènes',slug:'allergenes',show:true,text:'Nos produits peuvent contenir des allergènes (gluten, lait, œuf, soja, moutarde, sésame…). Demandez la liste détaillée à l\'équipe avant de commander.'}],popup:{enabled:false,title:'',text:'',image:''},banner:{enabled:false,text:''}};
 const Settings=mongoose.model('Settings',new mongoose.Schema({_id:String,data:Object},{minimize:false}));
 let geoT=0;
 async function geo(s){if(s.lat&&s.lng||Date.now()-geoT<36e5)return s;geoT=Date.now();
@@ -46,4 +46,15 @@ mongoose.connect(MONGODB_URI).then(async()=>{
   ['Boissons','Coca-Cola',3,'Coca-Cola original.',''],['Boissons','Coca-Cola Zéro',3,'Coca-Cola zéro.',''],['Boissons','Ice Tea',3,'Ice tea pêche.',''],['Boissons','Fanta',3,'Fanta orange.',''],
   ['Boissons','Red Bull',3,'Red Bull original.',''],['Boissons','Oasis Tropical',3,'Oasis tropical.',''],['Boissons','Eau',3,'Eau plate.','']
   ].map(([category,name,price,description,tag],i)=>({category,name,price,description,tag,order:i})))}
+ if(!await Settings.findById('seed2')){const P='/img/',C='Offres du labo';
+  await Item.insertMany([
+  ['Box Los Pollos Hermanos',10,'Riz crousty, burger, frites et boisson.','box.jpg','Best-seller'],['Chicken burger',6.9,'Menu : burger, frites et boisson.','chicken-burger.jpg',''],
+  ['Crousty gratiné',10,'Plusieurs variantes disponibles.','gratine.jpg',''],['Gratiné 16',16,'','gratine.jpg',''],
+  ['Crousty healthy',10,'Plusieurs variantes disponibles.','crousty-healthy.jpg','Healthy'],['Healthy',8,'','crousty-healthy.jpg','Healthy'],['Healthy + smoothie',10,'Offre Crousty Healthy avec smoothie.','healthy-smoothie.jpg','Offre'],
+  ['Crousty original',8.5,'Plusieurs variantes disponibles.','original.jpg',''],['Crousty végé',8.5,'','vege.jpg','Végé'],
+  ['Menu enfant',6.9,'Burger, frites et petite boisson.','menu-enfant.jpg',''],['Tenders x3',5,'','frites-tenders.jpg',''],['Frites',2.5,'','frites-tenders.jpg',''],
+  ['Riz au lait',5,'Kinder Bueno, Oreo ou M&M\'s.','riz-au-lait.jpg',''],['Smoothie',3,'','',''],['Soda',2.5,'','',''],['Eau 50cl',1.5,'','','']
+  ].map(([name,price,description,ph,tag],i)=>({category:C,name,price,description,photo:ph?P+ph:'',tag,order:100+i})));
+  await Settings.create({_id:'seed2',data:{}});
+  const st=await Settings.findById('main');if(st?.data?.categories&&!st.data.categories.includes(C)){st.data.categories.unshift(C);st.markModified('data');await st.save()}}
  app.listen(process.env.PORT||3000,()=>console.log('OK admin:'+AP))}).catch(e=>{console.error(e);process.exit(1)});
