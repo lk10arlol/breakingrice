@@ -52,7 +52,7 @@
 <script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bb=(t,c='')=>`<${t} class="bb ${c}"><span><span class="el"><i>Barkim</i><small>35</small>Br</span>eaking</span><span><span class="el"><i>Rice</i><small>15</small>Ri</span>ce</span></${t}>`;
-$('#hl').innerHTML=bb('div','sm');$('#hh').innerHTML='<img class="wl" src="/img/walter.png" alt="Walter" width="520" height="808">'+bb('h1');$('#hf').innerHTML=bb('div','sm');$('#yr').textContent=new Date().getFullYear();
+$('#hl').innerHTML=bb('div','sm');$('#hh').innerHTML='<div class="wlw"><img class="wl" src="/img/walter.png" alt="Walter" width="520" height="808"></div>'+bb('h1');$('#hf').innerHTML=bb('div','sm');$('#yr').textContent=new Date().getFullYear();
 const mol=()=>{const r=34,w=r*1.732,hx=(x,y)=>[0,1,2,3,4,5].map(i=>{const a=Math.PI/180*(60*i-30);return(x+r*Math.cos(a)).toFixed(1)+','+(y+r*Math.sin(a)).toFixed(1)}).join(' ');
  const H=[[70,60,'Riz'],[70+w,60,'Poulet'],[70+w/2,60+1.5*r,'Oignons'],[70+w*1.5,60+1.5*r,'Sauce'],[70+w,60+3*r,'Thaï'],[70+w*2,60+3*r,'Fromage']];
  return`<svg class="molsvg" viewBox="0 0 290 240" width="100%" style="max-width:300px">${H.map(([x,y,l])=>`<polygon points="${hx(x,y)}"/><text x="${x}" y="${y+4}">${l}</text>`).join('')}<path d="M${70+w*2+r*.87} ${60+3*r} l30 -18 M${70-w/2} ${60-r*.5} l-20 -14"/><text x="${70+w*2+60}" y="${60+3*r-14}">NH₂</text><text x="22" y="30">C₁₀H₁₅N</text></svg>`};
