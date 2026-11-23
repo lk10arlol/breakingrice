@@ -192,3 +192,19 @@ section{position:relative}
 .nav.open~.hr .burger span:nth-child(1){top:21px;transform:rotate(45deg)}
 .nav.open~.hr .burger span:nth-child(2){opacity:0}
 .nav.open~.hr .burger span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+.fp{color:#fff;background:#f2c94c24;border:1px solid var(--y);font-weight:600}
+.fit .fp{font-size:1.05rem;line-height:1.5;background:var(--y);color:#111;font-weight:700;text-align:center;padding:14px 18px;border:0;border-radius:8px}
+.fit .fp:before{content:"⚠ "}
+.soc a.sl{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;color:var(--t);text-decoration:none;transition:.2s}
+.sl svg{width:18px;height:18px;flex:none}
+.sl-instagram:hover{background:linear-gradient(45deg,#f9a825,#e1306c,#833ab4);border-color:transparent!important;color:#fff}
+.sl-tiktok:hover{background:#000;border-color:#25f4ee!important;color:#fff;box-shadow:-2px -2px 0 #25f4ee,2px 2px 0 #fe2c55}
+.sl-facebook:hover{background:#1877f2;border-color:transparent!important;color:#fff}
+.sl-snapchat:hover{background:#fffc00;border-color:transparent!important;color:#111}
+#follow{padding-top:0}
+.fw{max-width:860px;margin:0 auto;text-align:center;padding:34px 22px;border-radius:14px;border:1px solid var(--g2);background:radial-gradient(ellipse at 50% 0,#7cf03a22,transparent 60%),var(--card);display:flex;flex-direction:column;align-items:center;gap:12px}
+.fw h2{margin:0}.fw p{margin:0;max-width:560px}
+.soc.big{justify-content:center;margin-top:8px;gap:14px}
+.soc.big a.sl{padding:14px 26px;font-size:1rem;background:#0d150c;border:2px solid var(--y)}
+.soc.big .sl svg{width:24px;height:24px}
