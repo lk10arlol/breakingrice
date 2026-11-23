@@ -17,7 +17,7 @@
 <div class="tick" aria-hidden="true"><div id="tk"></div></div>
 <section id="protocole"><img class="dc d5" src="/img/fiole2.png" alt="" aria-hidden="true" loading="lazy"><div class="dc bb pt d8" aria-hidden="true"><span class="el"><i>Poulet</i><small>84</small>Po</span></div><h2 data-i="protH">Le <em>protocole</em></h2><p class="sub" data-i="protS">Trois étapes, aucune impureté.</p><div class="steps">
 <div class="step rv"><div class="n">1</div><h3 data-i="s1h">Choisis ta formule</h3><p data-i="s1p">Riz crousty, burgers, tenders, gratiné, healthy ou végé : le menu est juste en dessous.</p></div>
-<div class="step rv"><div class="n">2</div><h3 data-i="s2h">Commande sur Uber Eats</h3><p data-i="s2p">Un clic et tu es redirigé vers notre page Uber Eats pour choisir et commander.</p></div>
+<div class="step rv"><div class="n">2</div><h3 data-i="s2h">Commande ou passe sur place</h3><p data-i="s2p">Un clic et tu es redirigé vers Uber Eats pour commander, ou viens déguster directement sur place.</p></div>
 <div class="step rv"><div class="n">3</div><h3 data-i="s3h">Déguste</h3><p data-i="s3p">Croustillant, fondant, généreux. Pureté garantie à 99,1 %.</p></div></div></section>
 <div class="tape"></div>
 <section id="menu"><h2 data-i="menuH">Le <em>Menu</em></h2><p class="sub" data-i="menuS">Menus, riz crousty, burgers, extras, desserts et boissons. Touchez un plat pour voir les détails.</p>
@@ -32,6 +32,7 @@
 <div class="tape"></div>
 <section id="faq"><h2 data-i="faqH">Questions <em>fréquentes</em></h2><div class="faq" id="faqs"></div></section>
 <div class="tape"></div>
+<section id="follow" style="display:none"><div class="fw"><span class="tag" data-i="folT">Réseaux</span><h2 data-i="folH">Ne rate aucune <em>actu</em></h2><p data-i="folS"></p><div class="soc big" id="folb"></div></div></section>
 <section id="infos"><img class="dc d5" src="/img/masque2.png" alt="" aria-hidden="true" loading="lazy"><div class="dc bb pt d7" aria-hidden="true"><span class="el"><i>Maison</i><small>12</small>Ma</span></div><h2 data-i="findH">Nous <em>trouver</em></h2><p class="sub" data-i="findS">Le labo est ouvert. Venez goûter sur place ou commandez sans quitter le canapé.</p>
 <div class="find"><div class="side">
 <div class="ic"><b data-i="addr">☣ Adresse</b><p id="addr"></p><div class="adr"><a class="btn sm" id="itin" data-i="route" target="_blank" rel="noopener">Itinéraire →</a><a class="van" id="itin2" target="_blank" rel="noopener" aria-label="Itinéraire" tabindex="-1"><img src="/img/car.png" alt="" aria-hidden="true" width="640" height="275" loading="lazy"></a></div></div>
@@ -68,7 +69,7 @@ tw:["Say my name.|Zéro trace. 100 % goût.|Riz crousty, formule secrète.","Say
 tk:["Riz crousty|Burgers|Tenders|Gratiné|Healthy|Végé|Halal|Sauces maison|Pureté 99,1 %","Crispy rice|Burgers|Tenders|Gratinated|Healthy|Veggie|Halal|Homemade sauces|Purity 99.1%","Arroz crousty|Hamburguesas|Tenders|Gratinado|Healthy|Vegetariano|Halal|Salsas caseras|Pureza 99,1 %"],
 protH:["Le <em>protocole</em>","The <em>protocol</em>","El <em>protocolo</em>"],protS:["Trois étapes, aucune impureté.","Three steps, zero impurities.","Tres pasos, cero impurezas."],
 s1h:["Choisis ta formule","Pick your formula","Elige tu fórmula"],s1p:["Riz crousty, burgers, tenders, gratiné, healthy ou végé : le menu est juste en dessous.","Crispy rice, burgers, tenders, gratinated, healthy or veggie: the menu is right below.","Arroz crousty, hamburguesas, tenders, gratinado, healthy o vegetariano: el menú está justo debajo."],
-s2h:["Commande sur Uber Eats","Order on Uber Eats","Pide en Uber Eats"],s2p:["Un clic et tu es redirigé vers notre page Uber Eats pour choisir et commander.","One click and you land on our Uber Eats page to choose and order.","Un clic y pasas a nuestra página de Uber Eats para elegir y pedir."],
+s2h:["Commande ou passe sur place","Order or dine in","Pide o ven al local"],s2p:["Un clic et tu es redirigé vers Uber Eats pour commander, ou viens déguster directement sur place.","One click takes you to Uber Eats to order, or come and enjoy it right here on site.","Con un clic vas a Uber Eats para pedir, o ven a disfrutarlo directamente en el local."],
 s3h:["Déguste","Enjoy","Disfruta"],s3p:["Croustillant, fondant, généreux. Pureté garantie à 99,1 %.","Crispy, melting, generous. Purity guaranteed at 99.1%.","Crujiente, fundente, generoso. Pureza garantizada al 99,1 %."],
 menuH:["Le <em>Menu</em>","The <em>Menu</em>","El <em>Menú</em>"],menuS:["Menus, riz crousty, burgers, extras, desserts et boissons. Touchez un plat pour voir les détails.","Combos, crispy rice, burgers, sides, desserts and drinks. Tap a dish for details.","Menús, arroz crousty, hamburguesas, extras, postres y bebidas. Toca un plato para ver los detalles."],
 search:["Rechercher un plat…","Search for a dish…","Buscar un plato…"],searchA:["Rechercher un plat","Search for a dish","Buscar un plato"],all:["Tous","All","Todos"],
@@ -94,6 +95,9 @@ fpn:["Promo Fitness Park : réservée aux abonnés Fitness Park (carte requise).
 spn:["Carte disponible sur place uniquement (pas de livraison).","Menu available dine-in only (no delivery).","Carta disponible solo en el local (sin entrega a domicilio)."],
 spm:["Disponible sur place uniquement","Available dine-in only","Disponible solo en el local"]};
 const _=k=>{const a=I[k]||[k];return a[LI]??a[0]};
+Object.assign(I,{folT:["Réseaux","Social","Redes","Соцсети"],
+folH:["Ne rate aucune <em>actu</em>","Never miss an <em>update</em>","No te pierdas ninguna <em>novedad</em>","Не пропусти ни одной <em>новости</em>"],
+folS:["Nouvelles formules, offres de la semaine, coulisses du labo : suis-nous sur nos réseaux et n'oublie pas de t'abonner !","New formulas, weekly deals, behind the scenes at the lab: follow us on social media and don't forget to subscribe!","Nuevas fórmulas, ofertas de la semana, entre bambalinas del laboratorio: síguenos en nuestras redes y no olvides suscribirte.","Новые формулы, предложения недели, закулисье лаборатории: подписывайся на наши соцсети!"]});
 const NM={
 "Offres du labo":["Lab Offers","Ofertas del laboratorio"],"Sur place":["Dine-in","En el local"],"Menus":["Combos","Menús"],"Riz Crousty Original":["Original Crispy Rice","Arroz Crousty Original"],"Riz Crousty Gratiné":["Gratinated Crispy Rice","Arroz Crousty Gratinado"],"Extras":["Sides","Extras"],"Boissons":["Drinks","Bebidas"],"Desserts":["Desserts","Postres"],
 "Best-seller":["Best seller","Más vendido"],"Végé":["Veggie","Vegetariano"],"Offre":["Deal","Oferta"],"Nouveau":["New","Nuevo"],
@@ -133,7 +137,7 @@ chip1:"<b>99,1 %</b> чистоты",chip2:"<b>100 %</b> хруста",chip3:"<b
 tw:"Say my name.|Ноль следов. 100 % вкуса.|Хрустящий рис, секретная формула.",
 tk:"Хрустящий рис|Бургеры|Тендерсы|С запеканкой|Healthy|Вег|Халяль|Домашние соусы|Чистота 99,1 %",
 protH:"<em>Протокол</em>",protS:"Три шага, ноль примесей.",s1h:"Выбери формулу",s1p:"Хрустящий рис, бургеры, тендерсы, с запеканкой, healthy или вег: меню чуть ниже.",
-s2h:"Закажи в Uber Eats",s2p:"Один клик — и ты на нашей странице Uber Eats, чтобы выбрать и заказать.",s3h:"Наслаждайся",s3p:"Хрустящее, тягучее, щедрое. Чистота гарантирована на 99,1 %.",
+s2h:"Заказывай или приходи",s2p:"Один клик — и ты в Uber Eats, или приходи поесть прямо у нас на месте.",s3h:"Наслаждайся",s3p:"Хрустящее, тягучее, щедрое. Чистота гарантирована на 99,1 %.",
 menuH:"<em>Меню</em>",menuS:"Комбо, хрустящий рис, бургеры, дополнения, десерты и напитки. Нажмите на блюдо, чтобы увидеть детали.",
 search:"Найти блюдо…",searchA:"Найти блюдо",all:"Все",galH:"Лаборатория в <em>фото</em>",
 ordH:"Готов <em>готовить</em>?",ordS:"Доставка или самовывоз через Uber Eats. Никаких следов, только хруст.",ordB:"Заказать сейчас",
@@ -181,6 +185,9 @@ for(const k in RI)I[k][3]=RI[k];for(const k in RN)(NM[k]=NM[k]||[k,k])[2]=RN[k];
 const X=s=>LI&&NM[s]&&NM[s][LI-1]||s;
 const pick=(o,k)=>LI&&o[k+"_"+LG]?o[k+"_"+LG]:X(o[k]||"");
 const nmI=i=>pick(i,"name"),dsI=i=>pick(i,"description");
+const IC={instagram:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
+tiktok:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
+facebook:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg>'};
 function fitS(s){const f=s.fitness||{};if(!f.enabled)return;const tx=pick(f,"text"),cd=pick(f,"cond");$("#fth").textContent=pick(f,"title");$("#ftx").textContent=tx;$("#ftx").style.display=tx?"":"none";$("#fcd").textContent=cd;$("#fcd").style.display=cd?"":"none";$("#fpr").textContent=f.price||"";$("#fpr").style.display=f.price?"":"none";$("#ftag").textContent=_("fitTag");$("#fitness").style.display=""}
 (()=>{document.documentElement.lang=LG;document.title=_("ttl");const m=document.querySelector("meta[name=description]");if(m)m.content=_("mdesc");
 document.querySelectorAll("[data-i]").forEach(e=>e.innerHTML=_(e.dataset.i));document.querySelectorAll("[data-ip]").forEach(e=>e.placeholder=_(e.dataset.ip));document.querySelectorAll("[data-ia]").forEach(e=>e.setAttribute("aria-label",_(e.dataset.ia)));
@@ -251,7 +258,7 @@ function scroller(){const sc=$('#rvl'),w=$('.rvc');if(!sc.querySelector('.rc'))r
 function extras(s){
  const f=(s.faq||[]).filter(x=>x.q);reviews(s.google);$('#faqs').innerHTML=f.map(x=>`<details class="rv"><summary>${E(pick(x,'q'))}</summary><p>${E(pick(x,'a'))}</p></details>`).join('');if(!f.length)$('#faq').style.display='none';
  const so=s.socials||{},nm={instagram:'Instagram',tiktok:'TikTok',snapchat:'Snapchat',facebook:'Facebook'};
- $('#soc').innerHTML=$('#soc2').innerHTML=Object.keys(nm).filter(k=>/^https?:\/\//.test(so[k]||'')).map(k=>`<a href="${E(so[k])}" target="_blank" rel="noopener">${nm[k]}</a>`).join('');
+ {const lk=Object.keys(nm).filter(k=>/^https?:\/\//.test(so[k]||'')).map(k=>`<a class="sl sl-${k}" href="${E(so[k])}" target="_blank" rel="noopener" aria-label="${nm[k]}">${IC[k]||''}<span>${nm[k]}</span></a>`).join('');$('#soc').innerHTML=$('#soc2').innerHTML=$('#folb').innerHTML=lk;$('#follow').style.display=lk?'':'none'}
  const EN=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],hm=m=>String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0'),spec=[];
  (s.schedule||[]).forEach((t,i)=>rg(t).forEach(([a,b])=>spec.push({'@type':'OpeningHoursSpecification',dayOfWeek:EN[i],opens:hm(a),closes:hm(b)})));
  const d={'@context':'https://schema.org','@type':'Restaurant',name:'Breaking Rice',servesCuisine:['Poulet crousty','Riz','Burgers'],address:{'@type':'PostalAddress',streetAddress:s.address,addressCountry:'FR'},url:location.origin,hasMenu:location.origin+'/#menu',image:location.origin+'/img/box.jpg',openingHoursSpecification:spec};
