@@ -202,8 +202,7 @@ section{position:relative}
 .sl-tiktok:hover{background:#000;border-color:#25f4ee!important;color:#fff;box-shadow:-2px -2px 0 #25f4ee,2px 2px 0 #fe2c55}
 .sl-facebook:hover{background:#1877f2;border-color:transparent!important;color:#fff}
 .sl-snapchat:hover{background:#fffc00;border-color:transparent!important;color:#111}
-#follow{padding-top:60px}
-@media(max-width:700px){#follow{padding-top:36px}}
+#follow{padding-top:0}
 .fw{max-width:860px;margin:0 auto;text-align:center;padding:34px 22px;border-radius:14px;border:1px solid var(--g2);background:radial-gradient(ellipse at 50% 0,#7cf03a22,transparent 60%),var(--card);display:flex;flex-direction:column;align-items:center;gap:12px}
 .fw h2{margin:0}.fw p{margin:0;max-width:560px}
 .soc.big{justify-content:center;margin-top:8px;gap:14px}
@@ -216,7 +215,10 @@ section{position:relative}
 .soc a.sl.sl-tiktok:hover,.soc a.sl.sl-tiktok:focus-visible{background:#000;border-color:#25f4ee;box-shadow:-3px 0 0 #25f4ee,3px 0 0 #fe2c55,0 6px 22px #25f4ee55}
 .soc a.sl.sl-facebook:hover,.soc a.sl.sl-facebook:focus-visible{background:#1877f2;border-color:#1877f2;box-shadow:0 6px 22px #1877f288}
 .soc a.sl.sl-snapchat:hover,.soc a.sl.sl-snapchat:focus-visible{background:#fffc00;color:#111;border-color:#fffc00;box-shadow:0 6px 22px #fffc0066}
-.by{text-align:center;margin:6px auto 26px;font-size:.85rem;color:var(--t)}
-.by small{font-size:inherit;opacity:.7;letter-spacing:.04em}
-.by a{font:700 1rem Oswald,sans-serif;letter-spacing:.14em;color:var(--y);text-decoration:none;transition:.2s}
-.by a:hover{text-shadow:0 0 12px #f2c94c88;text-decoration:underline;text-underline-offset:4px}
+.by{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;margin:6px auto 26px;padding:10px 22px;border:2px solid var(--y);border-radius:999px;background:#f2c94c14;color:var(--t);text-decoration:none;transition:.2s}
+.by small{font-size:.8rem;opacity:.85;letter-spacing:.04em}
+.by b{font:700 1.25rem Oswald,sans-serif;letter-spacing:.16em;color:var(--y);text-shadow:0 0 14px #f2c94c88}
+.by i{font-style:normal;color:var(--y);transition:transform .2s}
+.by:hover{background:var(--y);box-shadow:0 6px 24px #f2c94c66;transform:translateY(-2px)}
+.by:hover small,.by:hover b,.by:hover i{color:#111;text-shadow:none;opacity:1}
+.by:hover i{transform:translate(2px,-2px)}
