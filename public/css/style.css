@@ -208,3 +208,17 @@ section{position:relative}
 .soc.big{justify-content:center;margin-top:8px;gap:14px}
 .soc.big a.sl{padding:14px 26px;font-size:1rem;background:#0d150c;border:2px solid var(--y)}
 .soc.big .sl svg{width:24px;height:24px}
+/* hover réseaux : même mécanique pour tous (soulèvement + fond de marque + bordure visible) */
+.soc a.sl{border:2px solid var(--y);background:#0d150c;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s,color .2s}
+.soc a.sl:hover,.soc a.sl:focus-visible{transform:translateY(-3px) scale(1.04);color:#fff}
+.soc a.sl.sl-instagram:hover,.soc a.sl.sl-instagram:focus-visible{background:linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4);border-color:#e1306c;box-shadow:0 6px 22px #e1306c88}
+.soc a.sl.sl-tiktok:hover,.soc a.sl.sl-tiktok:focus-visible{background:#000;border-color:#25f4ee;box-shadow:-3px 0 0 #25f4ee,3px 0 0 #fe2c55,0 6px 22px #25f4ee55}
+.soc a.sl.sl-facebook:hover,.soc a.sl.sl-facebook:focus-visible{background:#1877f2;border-color:#1877f2;box-shadow:0 6px 22px #1877f288}
+.soc a.sl.sl-snapchat:hover,.soc a.sl.sl-snapchat:focus-visible{background:#fffc00;color:#111;border-color:#fffc00;box-shadow:0 6px 22px #fffc0066}
+.by{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;margin:6px auto 26px;padding:10px 22px;border:2px solid var(--y);border-radius:999px;background:#f2c94c14;color:var(--t);text-decoration:none;transition:.2s}
+.by small{font-size:.8rem;opacity:.85;letter-spacing:.04em}
+.by b{font:700 1.25rem Oswald,sans-serif;letter-spacing:.16em;color:var(--y);text-shadow:0 0 14px #f2c94c88}
+.by i{font-style:normal;color:var(--y);transition:transform .2s}
+.by:hover{background:var(--y);box-shadow:0 6px 24px #f2c94c66;transform:translateY(-2px)}
+.by:hover small,.by:hover b,.by:hover i{color:#111;text-shadow:none;opacity:1}
+.by:hover i{transform:translate(2px,-2px)}
